@@ -58,7 +58,8 @@ curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 ```
 
 - https://github.com/jorgebucaran/fisher
-- 
+
+
 ### Krew : kubectl plugin manager
 
 Krew is the package manager for kubectl plugins.
@@ -99,6 +100,11 @@ kubectl krew
 ```
 
 ## Plugins
+
+List of plugins :
+- https://www.rockyourcode.com/fish-plugins-i-like/
+- https://github.com/jorgebucaran/awsm.fish
+
 ### Kubectl auto-completion
 
 Useful plugin is the kubectl completion that you can find here :
