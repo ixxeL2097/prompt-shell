@@ -42,10 +42,15 @@ functions will be saved as file in `~/.config/fish/functions` directory.
 Krew is the package manager for kubectl plugins.
 
 - https://github.com/kubernetes-sigs/krew/
+
 Quickstart:
 - https://krew.sigs.k8s.io/docs/user-guide/quickstart/
+
 Install:
 - https://krew.sigs.k8s.io/docs/user-guide/setup/install/
+
+List of plugins: 
+- https://krew.sigs.k8s.io/plugins/
 
 
 For fish, use these steps to install.
@@ -96,6 +101,20 @@ Kubextc and Kubens tools are very useful for managing kubernetes cluster :
 - https://github.com/ahmetb/kubectx
 
 `kubectx` is a tool to switch between contexts (clusters) on kubectl faster.
+
 `kubens` is a tool to switch between Kubernetes namespaces (and configure them for kubectl) easily.
+
+To install `kubens` and `kubectx` with `krew` plugin manager, just execute following commands :
+
+```
+kubectl krew install ctx
+kubectl krew install ns
+```
+
+And then use following commands to use it :
+```
+kubectl ns
+kubectl ctx
+```
 
 
