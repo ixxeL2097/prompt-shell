@@ -49,7 +49,17 @@ functions --erase k
 ```
 
 ## Plugin manager
-### Krew
+### Fisher : fish plugin manager
+
+To handle plugins, you can install `Fisher` :
+
+```
+curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+```
+
+- https://github.com/jorgebucaran/fisher
+- 
+### Krew : kubectl plugin manager
 
 Krew is the package manager for kubectl plugins.
 
@@ -87,16 +97,6 @@ set -gx PATH $PATH $HOME/.krew/bin
 ```
 kubectl krew
 ```
-
-### Fisher
-
-To handle plugins, you can install `Fisher` :
-
-```
-curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-```
-
-- https://github.com/jorgebucaran/fisher
 
 ## Plugins
 ### Kubectl auto-completion
