@@ -5,7 +5,7 @@ General repo for prompt shell usage and tips
 
 ## Install
 
-Fish shell is very useful and friendly. You can download it and customize it looking at this link :
+Fish is a smart & user-friendly command line shell for Linux, macOS, and the rest of the family. You can download it and customize it looking at this link :
 
 - https://fishshell.com/
 
