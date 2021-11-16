@@ -37,6 +37,12 @@ funcsave k
 
 functions will be saved as file in `~/.config/fish/functions` directory.
 
+If you want to delete function, you can use following cmd :
+
+```
+functions --erase k
+```
+
 ## Plugin manager
 
 Krew is the package manager for kubectl plugins.
