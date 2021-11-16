@@ -44,6 +44,7 @@ functions --erase k
 ```
 
 ## Plugin manager
+### Krew
 
 Krew is the package manager for kubectl plugins.
 
@@ -82,7 +83,7 @@ set -gx PATH $PATH $HOME/.krew/bin
 kubectl krew
 ```
 
-## Plugins
+### Fisher
 
 To handle plugins, you can install `Fisher` :
 
@@ -92,6 +93,9 @@ curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 
 - https://github.com/jorgebucaran/fisher
 
+## Plugins
+### Kubectl auto-completion
+
 Useful plugin is the kubectl completion that you can find here :
 
 - https://github.com/evanlucas/fish-kubectl-completions
@@ -100,7 +104,7 @@ Useful plugin is the kubectl completion that you can find here :
 fisher install evanlucas/fish-kubectl-completions
 ```
 
-## Kubectx/Kubens
+### Kubectx/Kubens
 
 Kubextc and Kubens tools are very useful for managing kubernetes cluster :
 
