@@ -13,6 +13,11 @@ Fish shell is very useful and friendly. You can download it and customize it loo
 
 - https://github.com/oh-my-fish/oh-my-fish
 
+install it :
+```
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+```
+
 You can then install themes using the `omf` command :
 
 ```
