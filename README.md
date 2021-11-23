@@ -105,6 +105,22 @@ List of plugins :
 - https://www.rockyourcode.com/fish-plugins-i-like/
 - https://github.com/jorgebucaran/awsm.fish
 
+### Fish ssh-agent
+
+Utility functions to start your ssh agent when using fish shell. You will only need to run `ssh-add` and type your password once, after the running ssh_agent should do the work for you.
+
+- https://github.com/danhper/fish-ssh-agent
+
+```
+fisher install danhper/fish-ssh-agent
+```
+
+Then you can directly use `ssh-add` :
+```
+ssh-add /home/fred/.ssh/wsl_github.pub
+ssh-add /home/fred/.ssh/wsl_github
+```
+
 ### Kubectl auto-completion
 
 Useful plugin is the kubectl completion that you can find here :
