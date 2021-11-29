@@ -106,6 +106,9 @@ end
 ```bash
 set -gx PATH $PATH $HOME/.krew/bin
 ```
+
+And add it to the ` ~/.config/fish/config.fish` file.
+
   - Test your command :
 ```
 kubectl krew
