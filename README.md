@@ -8,6 +8,13 @@ General repo for prompt shell usage and tips
 Fish is a smart & user-friendly command line shell for Linux, macOS, and the rest of the family. You can download it and customize it looking at this link :
 
 - https://fishshell.com/
+- https://github.com/fish-shell/fish-shell
+
+```
+sudo apt-add-repository ppa:fish-shell/release-3
+sudo apt-get update
+sudo apt-get install fish
+```
 
 **Oh-my-fish** is sort of a plugin for fish shell to handle themes and others. Look at this link :
 
@@ -16,6 +23,11 @@ Fish is a smart & user-friendly command line shell for Linux, macOS, and the res
 install it :
 ```
 curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+```
+
+List theme with :
+```
+omf theme
 ```
 
 You can then install themes using the `omf` command :
