@@ -108,7 +108,7 @@ set -gx PATH $PATH $HOME/.krew/bin
 ```
 
 And add it to the ` ~/.config/fish/config.fish` file:
-```
+```bash
 echo 'set -gx PATH $PATH $HOME/.krew/bin' >> ~/.config/fish/config.fish
 ```
 
