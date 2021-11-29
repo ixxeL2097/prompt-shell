@@ -121,6 +121,32 @@ ssh-add /home/fred/.ssh/wsl_github.pub
 ssh-add /home/fred/.ssh/wsl_github
 ```
 
+### Fuzzy Finder 
+
+Fuzzy Finder or `fzf` is a general purpose command line tool to find anything faster, be it your files or the command history.
+
+- https://github.com/jethrokuan/fzf#usage
+
+```
+fisher install jethrokuan/fzf
+```
+
+You may have to install `fzf` package as well:
+```
+apt install fzf
+```
+
+Shortcut:
+| Legacy      | New Keybindings | Remarks                                         |
+| ----------- | --------------- | ----------------------------------------------- |
+| Ctrl-t      | Ctrl-o          | Find a file.                                    |
+| Ctrl-r      | Ctrl-r          | Search through command history.                 |
+| Alt-c       | Alt-c           | cd into sub-directories (recursively searched). |
+| Alt-Shift-c | Alt-Shift-c     | cd into sub-directories, including hidden ones. |
+| Ctrl-o      | Alt-o           | Open a file/dir using default editor ($EDITOR)  |
+| Ctrl-g      | Alt-Shift-o     | Open a file/dir using xdg-open or open command  |
+
+
 ### Kubectl auto-completion
 
 Useful plugin is the kubectl completion that you can find here :
