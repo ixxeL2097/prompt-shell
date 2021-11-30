@@ -47,6 +47,18 @@ set -g theme_show_exit_status yes
 set -g theme_display_git_default_branch yes
 ```
 
+## VScode integration
+
+VSCode will probably not display fonts correctly. To fix this, just open the settings JSON by pressing `F1` then typing `Open Settings (JSON)` and then populate the json file with followings:
+
+```json
+{
+    "workbench.colorTheme": "Default Dark+",
+    "terminal.integrated.fontFamily": "MesloLGL Nerd Font" ,
+    "terminal.integrated.rendererType": "canvas"
+}
+```
+
 ## Functions
 
 To create functions execute following commands :
