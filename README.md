@@ -220,6 +220,12 @@ You may have to install `fzf` package as well:
 apt install fzf
 ```
 
+or :
+```
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+```
+
 Shortcut:
 | Legacy      | New Keybindings | Remarks                                         |
 | ----------- | --------------- | ----------------------------------------------- |
