@@ -36,6 +36,16 @@ You can then install themes using the `omf` command :
 omf install shellder
 ```
 
+If you choose `bobthefish` as a fish theme, you need to install nerd-fonts (https://github.com/ryanoasis/nerd-fonts), and here is the `~/.config/fish/config.fish` file:
+```
+set -gx PATH $PATH $HOME/.krew/bin
+set -g theme_display_k8s_context yes
+set -g theme_display_k8s_namespace yes
+set -g theme_display_user yes
+set -g theme_display_sudo_user yes
+set -g theme_show_exit_status yes
+```
+
 ## Functions
 
 To create functions execute following commands :
