@@ -44,6 +44,7 @@ set -g theme_display_k8s_namespace yes
 set -g theme_display_user yes
 set -g theme_display_sudo_user yes
 set -g theme_show_exit_status yes
+set -g theme_display_git_default_branch yes
 ```
 
 ## Functions
