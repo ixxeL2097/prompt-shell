@@ -270,4 +270,11 @@ kubectl ns
 kubectl ctx
 ```
 
+### Kubectl neat
+Kubectl neat allows to avoid managed fields displaying:
+- https://github.com/itaysk/kubectl-neat
 
+Install with krew:
+```
+kubectl krew install neat
+```
