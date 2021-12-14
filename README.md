@@ -278,3 +278,21 @@ Install with krew:
 ```
 kubectl krew install neat
 ```
+
+### NVM fish
+This tool helps you manage multiple active versions of Node on a single local environment. Quickly install and switch between runtimes without cluttering your home directory or breaking system-wide scripts.
+
+- https://github.com/jorgebucaran/nvm.fish
+
+Install with fisher:
+```
+fisher install jorgebucaran/nvm.fish
+```
+
+Install latest LTS node version and display:
+```
+nvm install lts
+nvm list
+nvm current
+```
+
