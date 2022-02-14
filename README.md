@@ -279,6 +279,15 @@ Install with krew:
 kubectl krew install neat
 ```
 
+### Kubectl whoami
+kubectl-whoami is a kubectl plugin that show the subject that's currently authenticated as.
+- https://github.com/rajatjindal/kubectl-whoami
+
+Install with krew:
+```
+kubectl krew install whoami
+```
+
 ### NVM fish
 This tool helps you manage multiple active versions of Node on a single local environment. Quickly install and switch between runtimes without cluttering your home directory or breaking system-wide scripts.
 
