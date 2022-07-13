@@ -279,6 +279,15 @@ Install with krew:
 kubectl krew install neat
 ```
 
+### Kubectl datree
+This kubectl plugin extends the Datree CLI's capabilities to allow scanning resources within your cluster for misconfigurations.
+- https://github.com/datreeio/kubectl-datree
+
+Install with krew:
+```
+kubectl krew install datree
+```
+
 ### Kubectl whoami
 kubectl-whoami is a kubectl plugin that show the subject that's currently authenticated as.
 - https://github.com/rajatjindal/kubectl-whoami
