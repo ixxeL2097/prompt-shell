@@ -314,3 +314,29 @@ nvm list
 nvm current
 ```
 
+# 02 - Git
+
+To visualize git more efficiently, you can use some plugins. Like git-graph for example:
+- https://github.com/mlange-42/git-graph
+
+```console
+[root@workstation ~ ]$ git-graph --style round --model simple                                                    
+         ●      77b981c (HEAD -> release/4.0, origin/release/4.0) new docker img build pipeline
+         ●      411baf3 updated precommit
+         ●      10e9700 maj from 12july
+         ●      dc1bcea using env dedicated app name
+       ● │      75760c6 (origin/release/3.1) using env dedicated app name
+       ╰─┤
+         ●      b197e62 going back to release ref
+         ●      1901446 [v3.1.0] prepare main merge
+     ○<╮ │      95fad7e (main, origin/main) Merge branch 'release/3.1' into 'main'
+     │ ● │      f1df601 prepare main merge
+     │ ├─╯
+     │ ○<╮      cbc151d Merge branch 'release/3.0' into 'main'
+     │ │ │ ●    06f47e0 (origin/release/3.0) added new build pipeline
+     ○<┼─┤ │    da16367 Merge branch 'release/3.0' into 'main'
+     ├─╯ │ │
+     │   ● │    67057d7 added new build pipeline
+```
+
+
