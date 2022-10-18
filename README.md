@@ -332,6 +332,16 @@ Install with krew:
 kubectl krew install view-allocations
 ```
 
+### Kubectl spy
+
+- https://github.com/huazhihao/kubespy
+
+kubespy is a kubectl plugin to debug a running pod. It creates a short-lived spy container, using specified image containing all the required debugging tools, to "spy" the target container by joining its OS namespaces. So the original target container image can keep clean without sacrificing the convenience for debugging on demand.
+
+Install with krew:
+```
+kubectl krew install spy
+```
 
 # 02 - Git
 
