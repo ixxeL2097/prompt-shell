@@ -314,6 +314,25 @@ nvm list
 nvm current
 ```
 
+### Kubectl ktop
+A top-like tool for your Kubernetes cluster
+- https://github.com/vladimirvivien/ktop
+
+Install with krew:
+```
+kubectl krew install ktop
+```
+
+### Kubectl view-allocation
+kubectl plugin lists allocations for resources (cpu, memory, gpu,...) as defined into the manifest of nodes and running pods. It doesn't list usage like kubectl top. It can provide result grouped by namespaces, nodes, pods and filtered by resources'name.
+- https://github.com/davidB/kubectl-view-allocations
+
+Install with krew:
+```
+kubectl krew install view-allocations
+```
+
+
 # 02 - Git
 
 To visualize git more efficiently, you can use some plugins. Like git-graph for example:
