@@ -73,6 +73,7 @@ ssh_only = false
 format = '[$ssh_symbol$hostname]($style) '
 style = 'bold blue'
 disabled = false
+ssh_symbol = '🔐'
 
 # Shows the username
 [username]
