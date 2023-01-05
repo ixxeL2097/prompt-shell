@@ -1,7 +1,196 @@
 # prompt-shell
 General repo for prompt shell usage and tips
+# 01 - Starship prompt
 
-# 01 - Fish shell
+install:
+```bash
+curl -sS https://starship.rs/install.sh | sh
+```
+
+For fish shell, add configuration in `~/.config/fish/config.fish`:
+```bash
+set distro (awk '/^ID=/' /etc/*-release | awk -F '=' '{print tolower($2)}')
+switch $distro
+  case '*alpine*'
+    set ICON " "
+  case '*arch*'
+    set ICON " "
+  case '*centos*'
+    set ICON " "
+  case '*debian*'
+    set ICON " "
+  case '*fedora*'
+    set ICON " "
+  case '*gentoo*'
+    set ICON " "
+  case '*manjaro*'
+    set ICON " "
+  case '*linuxmint*'
+    set ICON " "
+  case '*opensuse*'
+    set ICON " "
+  case '*raspbian*'
+    set ICON " "
+  case '*rhel*'
+    set ICON " "
+  case '*ubuntu*'
+    set ICON " "
+  case '*'
+    set ICON " "
+end
+
+set -gx STARSHIP_DISTRO $ICON
+
+starship init fish | source
+```
+
+Configuration for the prompte Starship `~/.config/starship.toml`:
+```toml
+# ~/.config/starship.toml
+
+# Inserts a blank line between shell prompts
+add_newline = false
+
+# Change the default prompt format
+format = """\
+[╭╴](238)$env_var\
+$all[╰─](238)$character"""
+
+# Change the default prompt characters
+[character]
+success_symbol = "[](238)"
+error_symbol = "[](238)"
+
+# Shows an icon that should be included by zshrc script based on the distribution or os
+[env_var.STARSHIP_DISTRO]
+format = '[$env_value](bold white)'  # removed space between distro and rest for pwsh
+variable = "STARSHIP_DISTRO"
+disabled = false
+
+# Shows the hostname
+[hostname]
+ssh_only = false
+format = '[$ssh_symbol$hostname]($style) '
+style = 'bold blue'
+disabled = false
+
+# Shows the username
+[username]
+style_user = "green bold"
+style_root = "red bold"
+format = "[$user]($style)@"
+disabled = false  # disable in powershell
+show_always = true
+
+[directory]
+truncation_length = 3
+truncation_symbol = "…/"
+home_symbol = " ~"
+read_only_style = "197"
+read_only = "  "
+format = "at [ $path]($style)[$read_only]($read_only_style) "
+
+[git_branch]
+symbol = " "
+format = "on [$symbol$branch]($style) "
+truncation_length = 4
+truncation_symbol = "…/"
+style = "bold green"
+
+[git_status]
+format = '[\($all_status$ahead_behind\)]($style) '
+style = "bold green"
+conflicted = "🏳"
+up_to_date = " "
+untracked = " "
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+stashed = " "
+modified = " "
+staged = '[++\($count\)](green)'
+renamed = "襁 "
+deleted = " "
+
+[terraform]
+format = "via[🚀terraform $version]($style) 壟 [$workspace]($style) "
+
+[vagrant]
+format = "via[🚀vagrant $version]($style) "
+
+[docker_context]
+format = "via[ $context](bold blue) "
+
+[helm]
+format = "via[☸️$version](bold purple) "
+
+[package]
+format = 'is [$symbol$version]($style) '
+symbol = '📦'
+style = '208 bold'
+display_private = false
+disabled = false
+version_format = 'v${raw}'
+
+[python]
+symbol = " "
+python_binary = "python3"
+
+[nodejs]
+format = "via[ $version](bold green) "
+disabled = true
+
+[ruby]
+format = "via[ $version]($style) "
+
+[kubernetes]
+format = 'on[⚓️$context](bold purple)[\[$namespace\]](bold red) '
+disabled = false
+[kubernetes.context_aliases]
+"kubernetes-admin@kubernetes" = "k8s-fredcorp"
+"clcreative-k8s-production" = "cl-k8s-prod"
+
+# OS symbols
+[os.symbols]
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "﯑ "
+Gentoo = " "
+HardenedBSD = "ﲊ "
+Illumos = " "
+Linux = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = " "
+openSUSE = " "
+OracleLinux = " "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+Redox = " "
+Solus = "ﴱ "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Windows = " "
+```
+
+# 02 - Fish shell
 
 ## Install
 
