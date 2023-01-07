@@ -10,6 +10,8 @@ curl -sS https://starship.rs/install.sh | sh
 You will need `JetBrainsMono Nerd Font` for this setup:
 - https://www.nerdfonts.com/font-downloads
 
+To install it on linux, just create the directory `~/.fonts` and execute command `fc-cache -fv`
+
 For fish shell, add configuration in `~/.config/fish/config.fish`:
 ```bash
 set distro (awk '/^ID=/' /etc/*-release | awk -F '=' '{print tolower($2)}')
