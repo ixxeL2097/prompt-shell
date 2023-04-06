@@ -324,6 +324,18 @@ If you want to delete function, you can use following cmd :
 functions --erase k
 ```
 
+To create alias execute following commands:
+```bash
+function bat
+  command bat --paging=never $argv
+end
+```
+
+then :
+```bash
+funcsave bat
+```
+
 ## Plugin manager
 ### Fisher : fish plugin manager
 
