@@ -507,6 +507,15 @@ Install with krew:
 kubectl krew install whoami
 ```
 
+### Kubectl kubecm
+Manage your kubeconfig more easily.
+- https://github.com/sunny0826/kubecm
+
+Install with krew:
+```
+kubectl krew install kc
+```
+
 ### NVM fish
 This tool helps you manage multiple active versions of Node on a single local environment. Quickly install and switch between runtimes without cluttering your home directory or breaking system-wide scripts.
 
