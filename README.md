@@ -300,6 +300,22 @@ VSCode will probably not display fonts correctly. To fix this, just open the set
 }
 ```
 
+```json
+{
+    "workbench.colorTheme": "Default Dark+",
+    "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+    "workbench.colorCustomizations": {
+        "list.errorForeground": "#b3e5ec",
+        "list.warningForeground": "#00d9ff",
+        "gitDecoration.modifiedResourceForeground": "#00ffb3",
+        "gitDecoration.untrackedResourceForeground": "#f7aeae"
+    },
+    "explorer.decorations.badges": true,
+    "explorer.decorations.colors": true,
+    "explorer.confirmDragAndDrop": false
+}
+```
+
 ## Functions
 
 To create functions execute following commands :
@@ -334,6 +350,12 @@ end
 then :
 ```bash
 funcsave bat
+```
+vcluster function:
+```
+function vk --wraps=vcluster
+  vcluster $argv
+end
 ```
 
 ## Plugin manager
