@@ -48,7 +48,9 @@ switch $distro
 end
 
 set -gx STARSHIP_DISTRO $ICON
+set -gx PATH $PATH $HOME/.krew/bin
 
+kubectl completion fish | source
 starship init fish | source
 ```
 
