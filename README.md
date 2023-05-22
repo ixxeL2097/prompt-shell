@@ -201,6 +201,284 @@ Unknown = " "
 Windows = " "
 ```
 
+improved profile:
+```toml
+# ~/.config/starship.toml
+
+# Inserts a blank line between shell prompts
+add_newline = false
+# Change the default prompt format
+#format = """\
+#[╭╴](238)$env_var\
+#$all[╰─](238)$character"""
+
+format = """
+[](fg:yellow)\
+$os\
+$username\
+$hostname\
+[](fg:yellow)\
+$kubernetes\
+$helm\
+$directory\
+[](fg:antracite bg:black)\
+${custom.git_server}\
+${custom.git_last_commit}\
+$git_branch\
+$git_state\
+$git_status\
+$package\
+$hg_branch\
+$c\
+$elixir\
+$elm\
+$golang\
+$gradle\
+$haskell\
+$java\
+$julia\
+$nodejs\
+$nim\
+$rust\
+$scala\
+$docker_context\
+$time\
+"""
+
+# Set 'foo' as custom color palette
+palette = 'ixxel'
+
+# Define custom colors
+[palettes.ixxel]
+# Overwrite existing color
+black = '#000000'
+white = '#E0DEF4'
+yellow = '#F3AE35'
+flash = '#ebcc34'
+orange = '#F07623'
+grey = '#262B44'
+blue = '#4B95E9'
+calmblue = '#2f52a4'
+niceblue = '#0077c2'
+green = '#59C9A5'
+red = '#D81E5B'
+purple = '#A020F0'
+cyan = '#00FFFF'
+ferrari = '#ff2800'
+antracite = '#353C40'
+electric = '#0892d0'
+navy = '#000080'
+teal = '#008081'
+
+[os]
+style = "fg:ferrari bg:yellow"
+disabled = false
+
+[username]
+style_user = "fg:black bg:yellow"
+style_root = "fg:red bg:yellow"
+format = '[$user]($style)'
+disabled = false
+show_always = true
+
+# Shows the hostname
+[hostname]
+ssh_only = false
+format = '[|$ssh_symbol$hostname ]($style)'
+style = "fg:black bg:yellow"
+disabled = false
+ssh_symbol = '🔐'
+
+[directory]
+style = "fg:black bg:antracite"
+truncation_length = 8
+truncation_symbol = "…/"
+home_symbol = " ~"
+read_only_style = "197"
+read_only = "  "
+format = "[](bg:antracite fg:black)[  $path ]($style)[$read_only]($read_only_style)"
+
+[git_branch]
+format = "[](fg:calmblue bg:black)[ $symbol$branch]($style)"
+symbol = " "
+style = "fg:black bg:calmblue"
+truncation_length = 12
+truncation_symbol = "…/"
+
+[git_state]
+format = '\( [$state( $progress_current/$progress_total)]($style)\)'
+style = "bold purple"
+
+[git_status]
+style = "fg:black bg:calmblue"
+format = '([$all_status$ahead_behind]($style)[](fg:calmblue))'
+up_to_date = '[  ](fg:bright-green bg:calmblue)'
+conflicted = '[  ](fg:red bg:calmblue)[$count](fg:white bg:calmblue)'
+ahead = '[ ﯁ ](fg:green bg:calmblue)[$count](fg:white bg:calmblue)'
+behind = '[ ﮾ ](fg:orange bg:calmblue)[$count](fg:white bg:calmblue)'
+diverged = '[  ](fg:purple bg:calmblue)|[ ﯁ ](fg:niceblue bg:calmblue)[$ahead_count](fg:white bg:calmblue)[ ﮾ ](white)[$behind_count](fg:white bg:calmblue)'
+untracked = '[  ](fg:purple bg:calmblue)[$count](fg:white bg:calmblue)'
+stashed = '[ ](fg:yellow bg:calmblue) [$count](fg:white bg:calmblue)'
+modified = '[  ](fg:orange bg:calmblue)[$count](fg:white bg:calmblue)'
+#modified = '\[[ ](bright-yellow)[$count](bright-white bold)\]'
+staged = '[  ](fg:bright-green bg:calmblue)[$count](fg:white bg:calmblue)'
+renamed = '[  ](fg:cyan bg:calmblue) [$count](fg:white bg:calmblue)'
+deleted = '[  ](fg:ferrari bg:calmblue)[$count](fg:white bg:calmblue)'
+
+################################################################################
+## Custom Commands
+################################################################################
+
+[custom.git_server]
+command = """
+URL=$(command git ls-remote --get-url 2> /dev/null)
+if [[ "$URL" =~ "github" ]]; then
+    ICON=" "
+elif [[ "$URL" =~ "gitlab" ]]; then
+    ICON=" "
+elif [[ "$URL" =~ "bitbucket" ]];then
+    ICON=" "
+elif [[ "$URL" =~ "kernel" ]];then
+    ICON=" "
+elif [[ "$URL" =~ "archlinux" ]];then
+    ICON=" "
+elif [[ "$URL" =~ "gnu" ]];then
+    ICON=" "
+elif [[ "$URL" =~ "git" ]];then
+    ICON=" "
+else
+    ICON=" "
+    URL="localhost"
+fi
+for PATTERN in "https" "http" "git" "://" "@"; do
+    [[ "$URL" == "$PATTERN"* ]] && URL="${URL##$PATTERN}"
+done
+for PATTERN in "/" ".git"; do
+    [[ "$URL" == *"$PATTERN" ]] && URL="${URL%%$PATTERN}"
+done
+URL=${URL#*:}
+printf "%s%s" "$ICON" "$URL"
+"""
+directories = [".git"]
+when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
+shell = ["bash","--norc","--noprofile"]
+style = "bg:black fg:bright-yellow bold"
+format = "[ $output ]($style)"
+
+[custom.git_last_commit]
+disabled = false
+description = "Display last commit hash and message"
+command = "git show -s --format=' %h'"
+directories = [".git"]
+when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
+shell = ["bash","--norc","--noprofile"]
+style = "fg:black bg:teal"
+format = "[](fg:teal bg:black)[$output]($style)[](fg:teal bg:black)"
+
+# Change the default prompt characters
+[character]
+success_symbol = "[](238)"
+error_symbol = "[](238)"
+
+# Shows an icon that should be included by zshrc script based on the distribution or os
+[env_var.STARSHIP_DISTRO]
+format = '[$env_value](bold white)'  # removed space between distro and rest for pwsh
+variable = "STARSHIP_DISTRO"
+disabled = false
+
+#[git_status]
+#format = '[\($all_status$ahead_behind\)]($style) '
+#style = "bold green"
+#conflicted = "🏳"
+#up_to_date = " "
+#untracked = " "
+#ahead = "⇡${count}"
+#diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+#behind = "⇣${count}"
+#stashed = " "
+#modified = " "
+#staged = '[++\($count\)](green)'
+#renamed = "襁 "
+#deleted = " "
+
+[terraform]
+format = "via[🚀terraform $version]($style) 壟 [$workspace]($style) "
+
+[vagrant]
+format = "via[🚀vagrant $version]($style) "
+
+[docker_context]
+format = "via[ $context](bold blue) "
+
+[helm]
+format = "[](bg:purple fg:black)[☸️$version](bg:purple fg:white)[](bg:black fg:purple)"
+
+[package]
+format = '[](bg:black fg:orange)[$symbol$version]($style)[](bg:black fg:orange)'
+symbol = '📦'
+style = 'bg:orange fg:black'
+display_private = false
+disabled = false
+version_format = 'v${raw}'
+
+[python]
+symbol = " "
+python_binary = "python3"
+
+[nodejs]
+format = "via[ $version](bold green) "
+disabled = true
+
+[ruby]
+format = "via[ $version]($style) "
+
+[kubernetes]
+format = '[](bg:flash fg:black)[⚓$context](bg:flash fg:black)[::$namespace](bg:flash fg:black)[](bg:black fg:flash)'
+disabled = false
+[kubernetes.context_aliases]
+"kubernetes-admin@kubernetes" = "k8s-fredcorp"
+"clcreative-k8s-production" = "cl-k8s-prod"
+
+# OS symbols
+[os.symbols]
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "﯑ "
+Gentoo = " "
+HardenedBSD = "ﲊ "
+Illumos = " "
+Linux = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = " "
+openSUSE = " "
+OracleLinux = " "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+Redox = " "
+Solus = "ﴱ "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Windows = " "
+```
+
 # 02 - Fish shell
 
 ## Install
