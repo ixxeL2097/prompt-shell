@@ -207,12 +207,10 @@ improved profile:
 
 # Inserts a blank line between shell prompts
 add_newline = false
-# Change the default prompt format
-#format = """\
-#[╭╴](238)$env_var\
-#$all[╰─](238)$character"""
+scan_timeout = 30
+command_timeout = 100
 
-format = """
+format = """\
 [](fg:yellow)\
 $os\
 $username\
@@ -242,8 +240,16 @@ $nim\
 $rust\
 $scala\
 $docker_context\
+$aws\
+$gcloud\
+$azure\
 $time\
-"""
+$line_break\
+$character"""
+
+################################################################################
+## Colors settings
+################################################################################
 
 # Set 'foo' as custom color palette
 palette = 'ixxel'
@@ -261,6 +267,7 @@ blue = '#4B95E9'
 calmblue = '#2f52a4'
 niceblue = '#0077c2'
 green = '#59C9A5'
+pine = '#01796F'
 red = '#D81E5B'
 purple = '#A020F0'
 cyan = '#00FFFF'
@@ -269,6 +276,10 @@ antracite = '#353C40'
 electric = '#0892d0'
 navy = '#000080'
 teal = '#008081'
+
+################################################################################
+## Static statuses
+################################################################################
 
 [os]
 style = "fg:ferrari bg:yellow"
@@ -291,7 +302,7 @@ ssh_symbol = '🔐'
 
 [directory]
 style = "fg:black bg:antracite"
-truncation_length = 8
+truncation_length = 1
 truncation_symbol = "…/"
 home_symbol = " ~"
 read_only_style = "197"
@@ -324,6 +335,56 @@ modified = '[  ](fg:orange bg:calmblue)[$count](fg:white bg:calmblue)'
 staged = '[  ](fg:bright-green bg:calmblue)[$count](fg:white bg:calmblue)'
 renamed = '[  ](fg:cyan bg:calmblue) [$count](fg:white bg:calmblue)'
 deleted = '[  ](fg:ferrari bg:calmblue)[$count](fg:white bg:calmblue)'
+
+[gcloud]
+style = 'fg:white bg:calmblue'
+symbol = '🇬️'
+format = '[](fg:black bg:calmblue)[$symbol$account(@$domain)(\($project\))]($style)[](fg:calmblue bg:black)'
+[gcloud.region_aliases]
+us-central1 = 'uc1'
+asia-northeast1 = 'an1'
+
+[character] # The name of the module we are configuring is 'character'
+success_symbol = '[λ](fg:pine)'
+error_symbol = "[λ](fg:red)"
+
+[terraform]
+format = "via[🚀terraform $version]($style) 壟 [$workspace]($style) "
+
+[vagrant]
+format = "via[🚀vagrant $version]($style) "
+
+[docker_context]
+format = "via[ $context](bold blue) "
+
+[helm]
+format = "[](bg:purple fg:black)[☸️$version](bg:purple fg:white)[](bg:black fg:purple)"
+
+[package]
+format = '[](bg:black fg:orange)[$symbol$version]($style)[](bg:black fg:orange)'
+symbol = '📦'
+style = 'bg:orange fg:black'
+display_private = false
+disabled = false
+version_format = 'v${raw}'
+
+[python]
+symbol = " "
+python_binary = "python3"
+
+[nodejs]
+format = "via[ $version](bold green) "
+disabled = true
+
+[ruby]
+format = "via[ $version]($style) "
+
+[kubernetes]
+format = '[](bg:flash fg:black)[⚓$context](bg:flash fg:black)[::$namespace](bg:flash fg:black)[](bg:black fg:flash)'
+disabled = false
+[kubernetes.context_aliases]
+"kubernetes-admin@kubernetes" = "k8s-fredcorp"
+"clcreative-k8s-production" = "cl-k8s-prod"
 
 ################################################################################
 ## Custom Commands
@@ -374,70 +435,6 @@ when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
 shell = ["bash","--norc","--noprofile"]
 style = "fg:black bg:teal"
 format = "[](fg:teal bg:black)[$output]($style)[](fg:teal bg:black)"
-
-# Change the default prompt characters
-[character]
-success_symbol = "[](238)"
-error_symbol = "[](238)"
-
-# Shows an icon that should be included by zshrc script based on the distribution or os
-[env_var.STARSHIP_DISTRO]
-format = '[$env_value](bold white)'  # removed space between distro and rest for pwsh
-variable = "STARSHIP_DISTRO"
-disabled = false
-
-#[git_status]
-#format = '[\($all_status$ahead_behind\)]($style) '
-#style = "bold green"
-#conflicted = "🏳"
-#up_to_date = " "
-#untracked = " "
-#ahead = "⇡${count}"
-#diverged = "⇕⇡${ahead_count}⇣${behind_count}"
-#behind = "⇣${count}"
-#stashed = " "
-#modified = " "
-#staged = '[++\($count\)](green)'
-#renamed = "襁 "
-#deleted = " "
-
-[terraform]
-format = "via[🚀terraform $version]($style) 壟 [$workspace]($style) "
-
-[vagrant]
-format = "via[🚀vagrant $version]($style) "
-
-[docker_context]
-format = "via[ $context](bold blue) "
-
-[helm]
-format = "[](bg:purple fg:black)[☸️$version](bg:purple fg:white)[](bg:black fg:purple)"
-
-[package]
-format = '[](bg:black fg:orange)[$symbol$version]($style)[](bg:black fg:orange)'
-symbol = '📦'
-style = 'bg:orange fg:black'
-display_private = false
-disabled = false
-version_format = 'v${raw}'
-
-[python]
-symbol = " "
-python_binary = "python3"
-
-[nodejs]
-format = "via[ $version](bold green) "
-disabled = true
-
-[ruby]
-format = "via[ $version]($style) "
-
-[kubernetes]
-format = '[](bg:flash fg:black)[⚓$context](bg:flash fg:black)[::$namespace](bg:flash fg:black)[](bg:black fg:flash)'
-disabled = false
-[kubernetes.context_aliases]
-"kubernetes-admin@kubernetes" = "k8s-fredcorp"
-"clcreative-k8s-production" = "cl-k8s-prod"
 
 # OS symbols
 [os.symbols]
