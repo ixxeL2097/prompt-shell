@@ -208,14 +208,12 @@ improved profile:
 # Inserts a blank line between shell prompts
 add_newline = false
 scan_timeout = 30
-command_timeout = 100
+command_timeout = 500
 
 format = """\
 [](fg:yellow)\
 $os\
 $username\
-$hostname\
-[](fg:yellow)\
 $kubernetes\
 $helm\
 $directory\
@@ -247,10 +245,6 @@ $time\
 $line_break\
 $character"""
 
-################################################################################
-## Colors settings
-################################################################################
-
 # Set 'foo' as custom color palette
 palette = 'ixxel'
 
@@ -276,10 +270,6 @@ antracite = '#353C40'
 electric = '#0892d0'
 navy = '#000080'
 teal = '#008081'
-
-################################################################################
-## Static statuses
-################################################################################
 
 [os]
 style = "fg:ferrari bg:yellow"
@@ -337,14 +327,67 @@ renamed = '[  ](fg:cyan bg:calmblue) [$count](fg:white bg:calmblue)'
 deleted = '[  ](fg:ferrari bg:calmblue)[$count](fg:white bg:calmblue)'
 
 [gcloud]
-style = 'fg:white bg:calmblue'
-symbol = '🇬️'
-format = '[](fg:black bg:calmblue)[$symbol$account(@$domain)(\($project\))]($style)[](fg:calmblue bg:black)'
+style = 'fg:black bg:pine'
+symbol = '🇬️ '
+format = '[](fg:black bg:pine)[$symbol$account(@$domain)(\($project\))]($style)[](fg:pine bg:black)'
 [gcloud.region_aliases]
 us-central1 = 'uc1'
 asia-northeast1 = 'an1'
 
+################################################################################
+## Custom Commands
+################################################################################
+
+[custom.git_server]
+command = """
+URL=$(command git ls-remote --get-url 2> /dev/null)
+if [[ "$URL" =~ "github" ]]; then
+    ICON=" "
+elif [[ "$URL" =~ "gitlab" ]]; then
+    ICON=" "
+elif [[ "$URL" =~ "bitbucket" ]];then
+    ICON=" "
+elif [[ "$URL" =~ "kernel" ]];then
+    ICON=" "
+elif [[ "$URL" =~ "archlinux" ]];then
+    ICON=" "
+elif [[ "$URL" =~ "gnu" ]];then
+    ICON=" "
+elif [[ "$URL" =~ "git" ]];then
+    ICON=" "
+else
+    ICON=" "
+    URL="localhost"
+fi
+for PATTERN in "https" "http" "git" "://" "@"; do
+    [[ "$URL" == "$PATTERN"* ]] && URL="${URL##$PATTERN}"
+done
+for PATTERN in "/" ".git"; do
+    [[ "$URL" == *"$PATTERN" ]] && URL="${URL%%$PATTERN}"
+done
+URL=${URL#*:}
+#printf "%s%s" "$ICON" "$URL"
+printf "%s" "$ICON"
+"""
+directories = [".git"]
+when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
+shell = ["bash","--norc","--noprofile"]
+style = "bg:black fg:white"
+format = "[ $output ]($style)"
+
+[custom.git_last_commit]
+disabled = false
+description = "Display last commit hash and message"
+command = "git show -s --format=' %h'"
+directories = [".git"]
+when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
+shell = ["bash","--norc","--noprofile"]
+style = "fg:black bg:electric"
+format = "[](fg:electric bg:black)[$output]($style)[](fg:electric bg:black)"
+
 [character] # The name of the module we are configuring is 'character'
+#success_symbol = '[](fg:pine)'
+#error_symbol = "[](fg:red)"
 success_symbol = '[λ](fg:pine)'
 error_symbol = "[λ](fg:red)"
 
@@ -380,61 +423,11 @@ disabled = true
 format = "via[ $version]($style) "
 
 [kubernetes]
-format = '[](bg:flash fg:black)[⚓$context](bg:flash fg:black)[::$namespace](bg:flash fg:black)[](bg:black fg:flash)'
+format = '[](bg:flash fg:yellow)[⚓$context](bg:flash fg:black)[::$namespace](bg:flash fg:black)[](bg:black fg:flash)'
 disabled = false
 [kubernetes.context_aliases]
 "kubernetes-admin@kubernetes" = "k8s-fredcorp"
 "clcreative-k8s-production" = "cl-k8s-prod"
-
-################################################################################
-## Custom Commands
-################################################################################
-
-[custom.git_server]
-command = """
-URL=$(command git ls-remote --get-url 2> /dev/null)
-if [[ "$URL" =~ "github" ]]; then
-    ICON=" "
-elif [[ "$URL" =~ "gitlab" ]]; then
-    ICON=" "
-elif [[ "$URL" =~ "bitbucket" ]];then
-    ICON=" "
-elif [[ "$URL" =~ "kernel" ]];then
-    ICON=" "
-elif [[ "$URL" =~ "archlinux" ]];then
-    ICON=" "
-elif [[ "$URL" =~ "gnu" ]];then
-    ICON=" "
-elif [[ "$URL" =~ "git" ]];then
-    ICON=" "
-else
-    ICON=" "
-    URL="localhost"
-fi
-for PATTERN in "https" "http" "git" "://" "@"; do
-    [[ "$URL" == "$PATTERN"* ]] && URL="${URL##$PATTERN}"
-done
-for PATTERN in "/" ".git"; do
-    [[ "$URL" == *"$PATTERN" ]] && URL="${URL%%$PATTERN}"
-done
-URL=${URL#*:}
-printf "%s%s" "$ICON" "$URL"
-"""
-directories = [".git"]
-when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
-shell = ["bash","--norc","--noprofile"]
-style = "bg:black fg:bright-yellow bold"
-format = "[ $output ]($style)"
-
-[custom.git_last_commit]
-disabled = false
-description = "Display last commit hash and message"
-command = "git show -s --format=' %h'"
-directories = [".git"]
-when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
-shell = ["bash","--norc","--noprofile"]
-style = "fg:black bg:teal"
-format = "[](fg:teal bg:black)[$output]($style)[](fg:teal bg:black)"
 
 # OS symbols
 [os.symbols]
@@ -632,6 +625,23 @@ vcluster function:
 ```
 function vk --wraps=vcluster
   vcluster $argv
+end
+```
+
+kubernetes useful functions:
+```
+function keti --wraps=kubectl-exec-it
+  kubectl exec -it $argv
+end
+```
+```
+function kd --wraps=kubectl-describe
+  kubectl describe $argv
+end
+```
+```
+function kg --wraps=kubectl-get
+  kubectl get $argv
 end
 ```
 
