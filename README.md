@@ -217,7 +217,6 @@ $username\
 $kubernetes\
 $helm\
 $directory\
-[](fg:antracite bg:black)\
 ${custom.git_server}\
 ${custom.git_last_commit}\
 $git_branch\
@@ -254,22 +253,26 @@ palette = 'ixxel'
 black = '#000000'
 white = '#E0DEF4'
 yellow = '#F3AE35'
+yellow-gcp = '#F4B400'
 flash = '#ebcc34'
 orange = '#F07623'
 grey = '#262B44'
 blue = '#4B95E9'
 calmblue = '#2f52a4'
 niceblue = '#0077c2'
-green = '#59C9A5'
+green = '82'
 pine = '#01796F'
 red = '#D81E5B'
 purple = '#A020F0'
+violet = '92'
+magenta = '#ff00ff'
 cyan = '#00FFFF'
 ferrari = '#ff2800'
 antracite = '#353C40'
 electric = '#0892d0'
 navy = '#000080'
 teal = '#008081'
+none = '#FFFFFF00'
 
 [os]
 style = "fg:ferrari bg:yellow"
@@ -297,12 +300,12 @@ truncation_symbol = "…/"
 home_symbol = " ~"
 read_only_style = "197"
 read_only = "  "
-format = "[](bg:antracite fg:black)[  $path ]($style)[$read_only]($read_only_style)"
+format = "[](bg:antracite fg:black)[  $path ]($style)[$read_only]($read_only_style)[](fg:antracite)"
 
 [git_branch]
-format = "[](fg:calmblue bg:black)[ $symbol$branch]($style)"
+format = "[](bg:electric fg:ferrari)[ $symbol$branch]($style)[](fg:ferrari)"
 symbol = " "
-style = "fg:black bg:calmblue"
+style = "bg:ferrari fg:black"
 truncation_length = 12
 truncation_symbol = "…/"
 
@@ -311,28 +314,26 @@ format = '\( [$state( $progress_current/$progress_total)]($style)\)'
 style = "bold purple"
 
 [git_status]
-style = "fg:black bg:calmblue"
-format = '([$all_status$ahead_behind]($style)[](fg:calmblue))'
-up_to_date = '[  ](fg:bright-green bg:calmblue)'
-conflicted = '[  ](fg:red bg:calmblue)[$count](fg:white bg:calmblue)'
-ahead = '[ ﯁ ](fg:green bg:calmblue)[$count](fg:white bg:calmblue)'
-behind = '[ ﮾ ](fg:orange bg:calmblue)[$count](fg:white bg:calmblue)'
-diverged = '[  ](fg:purple bg:calmblue)|[ ﯁ ](fg:niceblue bg:calmblue)[$ahead_count](fg:white bg:calmblue)[ ﮾ ](white)[$behind_count](fg:white bg:calmblue)'
-untracked = '[  ](fg:purple bg:calmblue)[$count](fg:white bg:calmblue)'
-stashed = '[ ](fg:yellow bg:calmblue) [$count](fg:white bg:calmblue)'
-modified = '[  ](fg:orange bg:calmblue)[$count](fg:white bg:calmblue)'
+style = "fg:white"
+format = '(->\[[$all_status$ahead_behind]($style)\])'
+up_to_date = '[ ](fg:green)'
+conflicted = '[  ](fg:red)[$count ](fg:white)'
+ahead = '[ ﯁ ](fg:green)[$count ](fg:white)'
+behind = '[ ﮾ ](fg:orange)[$count ](fg:white)'
+diverged = '[  ](fg:purple)|[ ﯁ ](fg:niceblue)[$ahead_count](bg:calmblue)[ ﮾ ](white)[$behind_count](bg:calmblue)'
+untracked = '[ ](fg:purple)[$count ](fg:white)'
+stashed = '[ ](fg:yellow) [$count ](fg:white)'
+modified = '[  ](fg:orange)[$count ](fg:white)'
 #modified = '\[[ ](bright-yellow)[$count](bright-white bold)\]'
-staged = '[  ](fg:bright-green bg:calmblue)[$count](fg:white bg:calmblue)'
-renamed = '[  ](fg:cyan bg:calmblue) [$count](fg:white bg:calmblue)'
-deleted = '[  ](fg:ferrari bg:calmblue)[$count](fg:white bg:calmblue)'
+staged = '[  ](fg:green)[$count ](fg:white)'
+renamed = '[  ](fg:cyan) [$count ](fg:white)'
+deleted = '[ ](fg:ferrari)[$count ](fg:white)'
 
 [gcloud]
-style = 'fg:black bg:pine'
-symbol = '🇬️ '
-format = '[](fg:black bg:pine)[$symbol$account(@$domain)(\($project\))]($style)[](fg:pine bg:black)'
-[gcloud.region_aliases]
-us-central1 = 'uc1'
-asia-northeast1 = 'an1'
+style = 'fg:black bg:131'
+symbol2 = '🇬️ '
+symbol = ' '
+format = '[](fg:131)[$symbol$account(@$domain)(\($project\))]($style)[](fg:131)'
 
 ################################################################################
 ## Custom Commands
@@ -373,7 +374,7 @@ directories = [".git"]
 when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
 shell = ["bash","--norc","--noprofile"]
 style = "bg:black fg:white"
-format = "[ $output ]($style)"
+format = "[](fg:black)[$output ]($style)[](bg:black fg:black)"
 
 [custom.git_last_commit]
 disabled = false
@@ -382,8 +383,8 @@ command = "git show -s --format=' %h'"
 directories = [".git"]
 when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
 shell = ["bash","--norc","--noprofile"]
-style = "fg:black bg:electric"
-format = "[](fg:electric bg:black)[$output]($style)[](fg:electric bg:black)"
+style = "bg:electric fg:black"
+format = "[](bg:black fg:electric)[$output ]($style)"
 
 [character] # The name of the module we are configuring is 'character'
 #success_symbol = '[](fg:pine)'
@@ -392,8 +393,8 @@ success_symbol = '[λ](fg:pine)'
 error_symbol = "[λ](fg:red)"
 
 [terraform]
-format = "via[🚀terraform $version]($style) 壟 [$workspace]($style) "
-
+format = "via[ terraform $version]($style) 壟 [$workspace]($style) "
+symbol = ' '
 [vagrant]
 format = "via[🚀vagrant $version]($style) "
 
@@ -401,13 +402,14 @@ format = "via[🚀vagrant $version]($style) "
 format = "via[ $context](bold blue) "
 
 [helm]
-format = "[](bg:purple fg:black)[☸️$version](bg:purple fg:white)[](bg:black fg:purple)"
+format = "[](bg:violet fg:black)[ $version](bg:violet fg:black)[](bg:black fg:violet)"
+symbol = '☸️  '
 
 [package]
-format = '[](bg:black fg:orange)[$symbol$version]($style)[](bg:black fg:orange)'
+format = '[](fg:teal)[  $version]($style)[](fg:teal)'
 symbol = '📦'
-style = 'bg:orange fg:black'
-display_private = false
+style = 'bg:teal fg:black'
+display_private = true
 disabled = false
 version_format = 'v${raw}'
 
@@ -423,8 +425,9 @@ disabled = true
 format = "via[ $version]($style) "
 
 [kubernetes]
-format = '[](bg:flash fg:yellow)[⚓$context](bg:flash fg:black)[::$namespace](bg:flash fg:black)[](bg:black fg:flash)'
+format = '[](bg:orange fg:yellow)[󰠳 $context](bg:orange fg:black)[ 󰀽 $namespace](bg:orange fg:black)[](fg:orange)'
 disabled = false
+symbol = '⚓ 󱃾 󰠳  '
 [kubernetes.context_aliases]
 "kubernetes-admin@kubernetes" = "k8s-fredcorp"
 "clcreative-k8s-production" = "cl-k8s-prod"
