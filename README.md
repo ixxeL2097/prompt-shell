@@ -303,10 +303,10 @@ read_only = "  "
 format = "[](bg:antracite fg:black)[  $path ]($style)[$read_only]($read_only_style)[](fg:antracite)"
 
 [git_branch]
-format = "[](bg:electric fg:ferrari)[ $symbol$branch]($style)[](fg:ferrari)"
+format = "[](bg:electric fg:ferrari)[ $symbol$branch ]($style)"
 symbol = " "
 style = "bg:ferrari fg:black"
-truncation_length = 12
+truncation_length = 16
 truncation_symbol = "…/"
 
 [git_state]
@@ -314,20 +314,21 @@ format = '\( [$state( $progress_current/$progress_total)]($style)\)'
 style = "bold purple"
 
 [git_status]
-style = "fg:white"
-format = '(->\[[$all_status$ahead_behind]($style)\])'
-up_to_date = '[ ](fg:green)'
-conflicted = '[  ](fg:red)[$count ](fg:white)'
-ahead = '[ ﯁ ](fg:green)[$count ](fg:white)'
-behind = '[ ﮾ ](fg:orange)[$count ](fg:white)'
-diverged = '[  ](fg:purple)|[ ﯁ ](fg:niceblue)[$ahead_count](bg:calmblue)[ ﮾ ](white)[$behind_count](bg:calmblue)'
-untracked = '[ ](fg:purple)[$count ](fg:white)'
-stashed = '[ ](fg:yellow) [$count ](fg:white)'
-modified = '[  ](fg:orange)[$count ](fg:white)'
+style = ""
+#format = '(->\[[$all_status$ahead_behind]($style)\])'
+format = '([](bg:ferrari fg:grey)[$all_status$ahead_behind]($style)[](fg:grey))'
+up_to_date = '[ ](fg:green bg:grey)'
+conflicted = '[  ](fg:red bg:grey)[$count ](fg:white bg:grey)'
+ahead = '[ ﯁ ](fg:green bg:grey)[$count ](fg:white bg:grey)'
+behind = '[ ﮾ ](fg:orange bg:grey)[$count ](fg:white bg:grey)'
+diverged = '[  ](fg:purple bg:grey)[ ﯁ ](fg:green bg:grey)[$ahead_count](bg:white bg:grey)[ ﮾ ](fg:orange bg:grey)[$behind_count](bg:white bg:grey)'
+untracked = '[ ](fg:purple bg:grey)[$count ](fg:white bg:grey)'
+stashed = '[ ](fg:yellow bg:grey) [$count ](fg:white bg:grey)'
+modified = '[  ](fg:orange bg:grey)[$count ](fg:white bg:grey)'
 #modified = '\[[ ](bright-yellow)[$count](bright-white bold)\]'
-staged = '[  ](fg:green)[$count ](fg:white)'
-renamed = '[  ](fg:cyan) [$count ](fg:white)'
-deleted = '[ ](fg:ferrari)[$count ](fg:white)'
+staged = '[  ](fg:green bg:grey)[$count ](fg:white bg:grey)'
+renamed = '[  ](fg:cyan bg:grey) [$count ](fg:white bg:grey)'
+deleted = '[ ](fg:ferrari bg:grey)[$count ](fg:white bg:grey)'
 
 [gcloud]
 style = 'fg:black bg:131'
@@ -425,7 +426,7 @@ disabled = true
 format = "via[ $version]($style) "
 
 [kubernetes]
-format = '[](bg:orange fg:yellow)[󰠳 $context](bg:orange fg:black)[ 󰀽 $namespace](bg:orange fg:black)[](fg:orange)'
+format = "[](bg:orange fg:yellow)[󰠳 $context](bg:orange fg:black)[ 󰀽 $namespace](bg:orange fg:black)[](bg:black fg:orange)"
 disabled = false
 symbol = '⚓ 󱃾 󰠳  '
 [kubernetes.context_aliases]
