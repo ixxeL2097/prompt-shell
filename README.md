@@ -633,7 +633,7 @@ end
 ```
 
 kubernetes useful functions:
-```
+```bash
 function keti --wraps=kubectl-exec-it
   kubectl exec -it $argv
 end
