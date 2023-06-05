@@ -626,7 +626,7 @@ then :
 funcsave bat
 ```
 vcluster function:
-```
+```bash
 function vk --wraps=vcluster
   vcluster $argv
 end
@@ -638,12 +638,12 @@ function keti --wraps=kubectl-exec-it
   kubectl exec -it $argv
 end
 ```
-```
+```bash
 function kd --wraps=kubectl-describe
   kubectl describe $argv
 end
 ```
-```
+```bash
 function kg --wraps=kubectl-get
   kubectl get $argv
 end
