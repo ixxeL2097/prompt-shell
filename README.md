@@ -541,7 +541,7 @@ Template for `oh-my-posh`:
           "template": "󰒋 {{ .Output }}",
           "properties": {
             "shell": "bash",
-            "command": "kubectl version --short | grep Server | awk -F: '{print $NF}' | sed 's/ //'"
+            "command": "kubectl version --short | grep Server | awk -F': ' '{print $NF}' | grep -Eo \"v?[0-9]+\\.[0-9]+\\.[0-9]+[-+]?([a-z0-9]+)?\""
           }
         },
 	{
@@ -582,7 +582,7 @@ Template for `oh-my-posh`:
 	  "powerline_symbol": "",
 	  "foreground": "#000000",
 	  "background": "p:green",
-	  "branch_icon": "\ue725",
+	  "branch_icon": "\uE725",
 	  "background_templates": [
 	    "{{ if or (.Working.Changed) (.Staging.Changed) }}p:yellow{{ end }}",
 	    "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#FFCC80{{ end }}",
