@@ -1158,6 +1158,51 @@ Install with krew:
 kubectl krew install spy
 ```
 
+### Kubectl stern
+
+- https://github.com/stern/stern
+
+Install with krew:
+```
+kubectl krew install stern
+```
+
+### Kubectl kubepug
+
+- https://github.com/kubepug/kubepug
+
+Install with krew:
+```
+kubectl krew install deprecations
+```
+
+### Kubectl ketall
+
+- https://github.com/corneliusweig/ketall
+
+Install with krew:
+```
+kubectl krew install get-all
+```
+
+### Kubectl tree
+
+- https://github.com/ahmetb/kubectl-tree
+
+Install with krew:
+```
+kubectl krew install tree
+```
+
+### Kubectl outdated
+
+- https://github.com/replicatedhq/outdated
+
+Install with krew:
+```
+kubectl krew install outdated
+```
+
 # 02 - Git
 
 To visualize git more efficiently, you can use some plugins. Like git-graph for example:
