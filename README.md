@@ -931,6 +931,70 @@ function kg --wraps=kubectl-get
   kubectl get $argv
 end
 ```
+```bash
+function kimg --wraps=kubectl-get-img
+  if test $argv[1] = "deploy"
+    kubectl get $argv -ojson | jq '.spec.template.spec.initContainers[]?.image, .spec.template.spec.containers[].image'
+  else
+    kubectl get $argv -ojson | jq '.spec.initContainers[]?.image, .spec.containers[].image'
+  end
+end
+```
+```bash
+function kga --wraps=kubectl-get-annotations
+  kubectl get $argv -ojson | jq '.metadata.annotations'
+end
+```
+```bash
+function kgl --wraps=kubectl-get-labels
+  kubectl get $argv -ojson | jq '.metadata.labels'
+end
+```
+```bash
+function krr --wraps=kubectl-rollout-restart
+  kubectl rollout restart $argv
+end
+```
+```bash
+function kyn --wraps=kubectl-oyaml-neat
+  kubectl get $argv -oyaml | kubectl neat | yq
+end
+```
+```bash
+function kvol --wraps=kubectl-get-volumes
+  if test $argv[1] = "deploy"
+    kubectl get $argv -ojson | jq '.spec.template.spec.volumes, .spec.template.spec.volumes'
+  else
+    kubectl get $argv -ojson | jq '.spec.volumes, .spec.volumes'
+  end
+end
+```
+```bash
+function kown --wraps=kubectl-get-owner
+  kubectl get $argv -ojson | jq '.metadata.ownerReferences'
+end
+```
+```bash
+function kport --wraps=kubectl-get-port
+  if test $argv[1] = "deploy"
+    kubectl get $argv -ojson | jq '.spec.template.spec.initContainers[]?.ports, .spec.template.spec.containers[].ports'
+  else
+    kubectl get $argv -ojson | jq '.spec.initContainers[]?.ports, .spec.containers[].ports'
+  end
+end
+```
+```bash
+function kmount --wraps=kubectl-get-volumeMounts
+  if test $argv[1] = "deploy"
+    kubectl get $argv -ojson | jq '.spec.template.spec.initContainers[]?.volumeMounts, .spec.template.spec.containers[].volumeMounts'
+  else
+    kubectl get $argv -ojson | jq '.spec.initContainers[]?.volumeMounts, .spec.containers[].volumeMounts'
+  end
+end
+```
+
+
+
 
 ## Plugin manager
 ### Fisher : fish plugin manager
