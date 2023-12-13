@@ -992,9 +992,11 @@ function kmount --wraps=kubectl-get-volumeMounts
   end
 end
 ```
-
-
-
+```bash
+function kgqos --wraps kubectl
+  kubectl get pods $argv -o custom-columns="NAME:.metadata.name, QOS:.status.qosClass, REQUESTS:.spec.containers[*].resources.requests, LIMITS:.spec.containers[*].resources.limits, PRIORITY_CLASS:.spec.priorityClassName"
+end
+```
 
 ## Plugin manager
 ### Fisher : fish plugin manager
