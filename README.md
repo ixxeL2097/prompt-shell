@@ -919,7 +919,7 @@ end
 ```
 
 ```bash
-function ll --wraps ls
+function ll --wraps ll
   eza --icons --group-directories-first -l $argv
 end
 ```
