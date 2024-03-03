@@ -872,6 +872,19 @@ VSCode will probably not display fonts correctly. To fix this, just open the set
     "explorer.confirmDragAndDrop": false
 }
 ```
+## Tools
+
+Eza : https://github.com/eza-community/eza
+
+```
+sudo apt install -y gpg
+sudo mkdir -p /etc/apt/keyrings
+wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
+sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
+sudo apt update
+sudo apt install -y eza
+```
 
 ## Functions
 
@@ -898,6 +911,19 @@ functions --erase k
 ```
 
 To create alias execute following commands:
+
+```bash
+function ls --wraps ls
+  eza --icons --group-directories-first $argv
+end
+```
+
+```bash
+function ll --wraps ls
+  eza --icons --group-directories-first -l $argv
+end
+```
+
 ```bash
 function bat
   command bat --paging=never $argv
