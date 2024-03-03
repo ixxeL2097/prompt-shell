@@ -48,10 +48,12 @@ switch $distro
 end
 
 set -gx STARSHIP_DISTRO $ICON
-set -gx PATH $PATH $HOME/.krew/bin
-
 kubectl completion fish | source
-starship init fish | source
+k completion fish | source
+#starship init fish | source
+oh-my-posh init fish --config ~/.mytheme.omp.json | source
+set -gx PATH $PATH $HOME/.krew/bin
+set -gx PATH $PATH $HOME/.local/bin
 ```
 
 Configuration for the prompte Starship `~/.config/starship.toml`:
