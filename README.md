@@ -1,11 +1,18 @@
 # prompt-shell
 General repo for prompt shell usage and tips
-# 01 - Starship prompt
+# 01 - Prompt
 
-install:
+install `starhip`:
 ```bash
 curl -sS https://starship.rs/install.sh | sh
 ```
+
+install `oh-my-posh`:
+```bash
+curl -s https://ohmyposh.dev/install.sh | bash -s
+```
+
+Fonts:
 
 You will need `JetBrainsMono Nerd Font` for this setup:
 - https://www.nerdfonts.com/font-downloads
@@ -15,747 +22,28 @@ To install it on linux, just create the directory `~/.fonts` and execute command
 fc-cache -fv
 ```
 
-For fish shell, add configuration in `~/.config/fish/config.fish`:
+## Fish shell
+
+For fish shell, add configuration in `~/.config/fish/config.fish` --> [link](./src/config.fish)
+
+## Starship
+
+Configuration for the prompte Starship `~/.config/starship.toml` --> [link](./src/starship.toml)
+
+Improved profile --> [`link`](./src/starship2.toml)
+
+## Oh my posh
+
+Template for oh-my-posh `.mytheme.omp.json` --> [`link`](./src/oh-my-posh.json)
+
+Adjust the Oh My Posh init line in `~/.config/fish/config.fish` by adding the `--config` flag with the location of your configuration.
 ```bash
-set distro (awk '/^ID=/' /etc/*-release | awk -F '=' '{print tolower($2)}')
-switch $distro
-  case '*alpine*'
-    set ICON " "
-  case '*arch*'
-    set ICON " "
-  case '*centos*'
-    set ICON " "
-  case '*debian*'
-    set ICON " "
-  case '*fedora*'
-    set ICON " "
-  case '*gentoo*'
-    set ICON " "
-  case '*manjaro*'
-    set ICON " "
-  case '*linuxmint*'
-    set ICON " "
-  case '*opensuse*'
-    set ICON " "
-  case '*raspbian*'
-    set ICON " "
-  case '*rhel*'
-    set ICON " "
-  case '*ubuntu*'
-    set ICON " "
-  case '*'
-    set ICON " "
-end
-
-set -gx STARSHIP_DISTRO $ICON
-kubectl completion fish | source
-k completion fish | source
-#starship init fish | source
-oh-my-posh init fish --config ~/.mytheme.omp.json | source
-set -gx PATH $PATH $HOME/.krew/bin
-set -gx PATH $PATH $HOME/.local/bin
+oh-my-posh init fish --config ~/jandedobbeleer.omp.json | source
 ```
 
-Configuration for the prompte Starship `~/.config/starship.toml`:
-```toml
-# ~/.config/starship.toml
-
-# Inserts a blank line between shell prompts
-add_newline = false
-
-# Change the default prompt format
-format = """\
-[╭╴](238)$env_var\
-$all[╰─](238)$character"""
-
-# Change the default prompt characters
-[character]
-success_symbol = "[](238)"
-error_symbol = "[](238)"
-
-# Shows an icon that should be included by zshrc script based on the distribution or os
-[env_var.STARSHIP_DISTRO]
-format = '[$env_value](bold white)'  # removed space between distro and rest for pwsh
-variable = "STARSHIP_DISTRO"
-disabled = false
-
-# Shows the hostname
-[hostname]
-ssh_only = false
-format = '[$ssh_symbol$hostname]($style) '
-style = 'bold blue'
-disabled = false
-ssh_symbol = '🔐'
-
-# Shows the username
-[username]
-style_user = "green bold"
-style_root = "red bold"
-format = "[$user]($style)@"
-disabled = false  # disable in powershell
-show_always = true
-
-[directory]
-truncation_length = 3
-truncation_symbol = "…/"
-home_symbol = " ~"
-read_only_style = "197"
-read_only = "  "
-format = "at [ $path]($style)[$read_only]($read_only_style) "
-
-[git_branch]
-symbol = " "
-format = "on [$symbol$branch]($style) "
-truncation_length = 4
-truncation_symbol = "…/"
-style = "bold green"
-
-[git_status]
-format = '[\($all_status$ahead_behind\)]($style) '
-style = "bold green"
-conflicted = "🏳"
-up_to_date = " "
-untracked = " "
-ahead = "⇡${count}"
-diverged = "⇕⇡${ahead_count}⇣${behind_count}"
-behind = "⇣${count}"
-stashed = " "
-modified = " "
-staged = '[++\($count\)](green)'
-renamed = "襁 "
-deleted = " "
-
-[terraform]
-format = "via[🚀terraform $version]($style) 壟 [$workspace]($style) "
-
-[vagrant]
-format = "via[🚀vagrant $version]($style) "
-
-[docker_context]
-format = "via[ $context](bold blue) "
-
-[helm]
-format = "via[☸️$version](bold purple) "
-
-[package]
-format = 'is [$symbol$version]($style) '
-symbol = '📦'
-style = '208 bold'
-display_private = false
-disabled = false
-version_format = 'v${raw}'
-
-[python]
-symbol = " "
-python_binary = "python3"
-
-[nodejs]
-format = "via[ $version](bold green) "
-disabled = true
-
-[ruby]
-format = "via[ $version]($style) "
-
-[kubernetes]
-format = 'on[⚓️$context](bold purple)[\[$namespace\]](bold red) '
-disabled = false
-[kubernetes.context_aliases]
-"kubernetes-admin@kubernetes" = "k8s-fredcorp"
-"clcreative-k8s-production" = "cl-k8s-prod"
-
-# OS symbols
-[os.symbols]
-Alpine = " "
-Amazon = " "
-Android = " "
-Arch = " "
-CentOS = " "
-Debian = " "
-DragonFly = " "
-Emscripten = " "
-EndeavourOS = " "
-Fedora = " "
-FreeBSD = " "
-Garuda = "﯑ "
-Gentoo = " "
-HardenedBSD = "ﲊ "
-Illumos = " "
-Linux = " "
-Macos = " "
-Manjaro = " "
-Mariner = " "
-MidnightBSD = " "
-Mint = " "
-NetBSD = " "
-NixOS = " "
-OpenBSD = " "
-openSUSE = " "
-OracleLinux = " "
-Pop = " "
-Raspbian = " "
-Redhat = " "
-RedHatEnterprise = " "
-Redox = " "
-Solus = "ﴱ "
-SUSE = " "
-Ubuntu = " "
-Unknown = " "
-Windows = " "
-```
-
-improved profile:
-```toml
-# ~/.config/starship.toml
-
-# Inserts a blank line between shell prompts
-add_newline = false
-scan_timeout = 30
-command_timeout = 500
-
-format = """\
-[](fg:yellow)\
-$os\
-$username\
-$kubernetes\
-$helm\
-$directory\
-${custom.git_server}\
-${custom.git_last_commit}\
-$git_branch\
-$git_state\
-$git_status\
-$package\
-$hg_branch\
-$c\
-$elixir\
-$elm\
-$golang\
-$gradle\
-$haskell\
-$java\
-$julia\
-$nodejs\
-$nim\
-$rust\
-$scala\
-$docker_context\
-$aws\
-$gcloud\
-$azure\
-$time\
-$line_break\
-$character"""
-
-# Set 'foo' as custom color palette
-palette = 'ixxel'
-
-# Define custom colors
-[palettes.ixxel]
-# Overwrite existing color
-black = '#000000'
-white = '#E0DEF4'
-yellow = '#F3AE35'
-yellow-gcp = '#F4B400'
-flash = '#ebcc34'
-orange = '#F07623'
-grey = '#262B44'
-blue = '#4B95E9'
-calmblue = '#2f52a4'
-niceblue = '#0077c2'
-green = '82'
-pine = '#01796F'
-red = '#D81E5B'
-purple = '#A020F0'
-violet = '92'
-magenta = '#ff00ff'
-cyan = '#00FFFF'
-ferrari = '#ff2800'
-antracite = '#353C40'
-electric = '#0892d0'
-navy = '#000080'
-teal = '#008081'
-none = '#FFFFFF00'
-
-[os]
-style = "fg:ferrari bg:yellow"
-disabled = false
-
-[username]
-style_user = "fg:black bg:yellow"
-style_root = "fg:red bg:yellow"
-format = '[$user]($style)'
-disabled = false
-show_always = true
-
-# Shows the hostname
-[hostname]
-ssh_only = false
-format = '[|$ssh_symbol$hostname ]($style)'
-style = "fg:black bg:yellow"
-disabled = false
-ssh_symbol = '🔐'
-
-[directory]
-style = "fg:black bg:antracite"
-truncation_length = 1
-truncation_symbol = "…/"
-home_symbol = " ~"
-read_only_style = "197"
-read_only = "  "
-format = "[](bg:antracite fg:black)[  $path ]($style)[$read_only]($read_only_style)[](fg:antracite)"
-
-[git_branch]
-format = "[](bg:electric fg:ferrari)[ $symbol$branch ]($style)"
-symbol = " "
-style = "bg:ferrari fg:black"
-truncation_length = 16
-truncation_symbol = "…/"
-
-[git_state]
-format = '\( [$state( $progress_current/$progress_total)]($style)\)'
-style = "bold purple"
-
-[git_status]
-style = ""
-#format = '(->\[[$all_status$ahead_behind]($style)\])'
-format = '([](bg:ferrari fg:grey)[$all_status$ahead_behind]($style)[](fg:grey))'
-up_to_date = '[ ](fg:green bg:grey)'
-conflicted = '[  ](fg:red bg:grey)[$count ](fg:white bg:grey)'
-ahead = '[ ﯁ ](fg:green bg:grey)[$count ](fg:white bg:grey)'
-behind = '[ ﮾ ](fg:orange bg:grey)[$count ](fg:white bg:grey)'
-diverged = '[  ](fg:purple bg:grey)[ ﯁ ](fg:green bg:grey)[$ahead_count](bg:white bg:grey)[ ﮾ ](fg:orange bg:grey)[$behind_count](bg:white bg:grey)'
-untracked = '[ ](fg:purple bg:grey)[$count ](fg:white bg:grey)'
-stashed = '[ ](fg:yellow bg:grey) [$count ](fg:white bg:grey)'
-modified = '[  ](fg:orange bg:grey)[$count ](fg:white bg:grey)'
-#modified = '\[[ ](bright-yellow)[$count](bright-white bold)\]'
-staged = '[  ](fg:green bg:grey)[$count ](fg:white bg:grey)'
-renamed = '[  ](fg:cyan bg:grey) [$count ](fg:white bg:grey)'
-deleted = '[ ](fg:ferrari bg:grey)[$count ](fg:white bg:grey)'
-
-[gcloud]
-style = 'fg:black bg:131'
-symbol2 = '🇬️ '
-symbol = ' '
-format = '[](fg:131)[$symbol$account(@$domain)(\($project\))]($style)[](fg:131)'
-
-################################################################################
-## Custom Commands
-################################################################################
-
-[custom.git_server]
-command = """
-URL=$(command git ls-remote --get-url 2> /dev/null)
-if [[ "$URL" =~ "github" ]]; then
-    ICON=" "
-elif [[ "$URL" =~ "gitlab" ]]; then
-    ICON=" "
-elif [[ "$URL" =~ "bitbucket" ]];then
-    ICON=" "
-elif [[ "$URL" =~ "kernel" ]];then
-    ICON=" "
-elif [[ "$URL" =~ "archlinux" ]];then
-    ICON=" "
-elif [[ "$URL" =~ "gnu" ]];then
-    ICON=" "
-elif [[ "$URL" =~ "git" ]];then
-    ICON=" "
-else
-    ICON=" "
-    URL="localhost"
-fi
-for PATTERN in "https" "http" "git" "://" "@"; do
-    [[ "$URL" == "$PATTERN"* ]] && URL="${URL##$PATTERN}"
-done
-for PATTERN in "/" ".git"; do
-    [[ "$URL" == *"$PATTERN" ]] && URL="${URL%%$PATTERN}"
-done
-URL=${URL#*:}
-#printf "%s%s" "$ICON" "$URL"
-printf "%s" "$ICON"
-"""
-directories = [".git"]
-when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
-shell = ["bash","--norc","--noprofile"]
-style = "bg:black fg:white"
-format = "[](fg:black)[$output ]($style)[](bg:black fg:black)"
-
-[custom.git_last_commit]
-disabled = false
-description = "Display last commit hash and message"
-command = "git show -s --format=' %h'"
-directories = [".git"]
-when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
-shell = ["bash","--norc","--noprofile"]
-style = "bg:electric fg:black"
-format = "[](bg:black fg:electric)[$output ]($style)"
-
-[character] # The name of the module we are configuring is 'character'
-#success_symbol = '[](fg:pine)'
-#error_symbol = "[](fg:red)"
-success_symbol = '[λ](fg:pine)'
-error_symbol = "[λ](fg:red)"
-
-[terraform]
-format = "via[ terraform $version]($style) 壟 [$workspace]($style) "
-symbol = ' '
-[vagrant]
-format = "via[🚀vagrant $version]($style) "
-
-[docker_context]
-format = "via[ $context](bold blue) "
-
-[helm]
-format = "[](bg:violet fg:black)[ $version](bg:violet fg:black)[](bg:black fg:violet)"
-symbol = '☸️  '
-
-[package]
-format = '[](fg:teal)[  $version]($style)[](fg:teal)'
-symbol = '📦'
-style = 'bg:teal fg:black'
-display_private = true
-disabled = false
-version_format = 'v${raw}'
-
-[python]
-symbol = " "
-python_binary = "python3"
-
-[nodejs]
-format = "via[ $version](bold green) "
-disabled = true
-
-[ruby]
-format = "via[ $version]($style) "
-
-[kubernetes]
-format = "[](bg:orange fg:yellow)[󰠳 $context](bg:orange fg:black)[ 󰀽 $namespace](bg:orange fg:black)[](bg:black fg:orange)"
-disabled = false
-symbol = '⚓ 󱃾 󰠳  '
-[kubernetes.context_aliases]
-"kubernetes-admin@kubernetes" = "k8s-fredcorp"
-"clcreative-k8s-production" = "cl-k8s-prod"
-
-# OS symbols
-[os.symbols]
-Alpine = " "
-Amazon = " "
-Android = " "
-Arch = " "
-CentOS = " "
-Debian = " "
-DragonFly = " "
-Emscripten = " "
-EndeavourOS = " "
-Fedora = " "
-FreeBSD = " "
-Garuda = "﯑ "
-Gentoo = " "
-HardenedBSD = "ﲊ "
-Illumos = " "
-Linux = " "
-Macos = " "
-Manjaro = " "
-Mariner = " "
-MidnightBSD = " "
-Mint = " "
-NetBSD = " "
-NixOS = " "
-OpenBSD = " "
-openSUSE = " "
-OracleLinux = " "
-Pop = " "
-Raspbian = " "
-Redhat = " "
-RedHatEnterprise = " "
-Redox = " "
-Solus = "ﴱ "
-SUSE = " "
-Ubuntu = " "
-Unknown = " "
-Windows = " "
-```
-
-Template for `oh-my-posh`:
-```json
-{
-  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
-  "version": 2,
-  "final_space": true,
-  "console_title_template": "{{ .Shell }} in {{ .Folder }}",
-  "blocks": [
-    {
-      "type": "prompt",
-      "alignment": "left",
-      "segments": [
-	{
-	  "type": "shell",
-	  "style": "powerline",
-	  "powerline_symbol": "",
-	  "foreground": "#ffffff",
-	  "background": "#0077c2",
-	  "properties": {
-	    "mapped_shell_names": {
-	      "pwsh": "PS"
-	    }
-	  }
-	},	      
-	{
-	  "type": "os",
-	  "style": "powerline",
-	  "powerline_symbol": "",
-	  "foreground": "#26C6DA",
-	  "background": "#546E7A",
-	  "template": " {{ if .WSL }}WSL  {{ end }}{{.Icon}} ",
-	  "properties": {
-	    "macos": "mac"
-	  }
-	},
-	{
-	  "type": "dotnet",
-	  "style": "powerline",
-	  "powerline_symbol": "",
-	  "foreground": "#000000",
-	  "background": "#00ffff",
-	  "template": "  {{ .Full }} "
-	},
-	{
-	  "type": "docker",
-	  "style": "powerline",
-	  "powerline_symbol": "",
-	  "foreground": "#000000",
-	  "background": "#0B59E7",
-	  "template": "  {{ .Context }} "
-	},
-	{
-	  "type": "kubectl",
-	  "style": "powerline",
-	  "powerline_symbol": "",
-	  "foreground": "#000000",
-	  "background": "#ebcc34",
-	  "template": " 󰠳 {{.Context}}{{if .Namespace}} 󰀽 {{.Namespace}}{{end}} "
-	},
-        {
-          "type": "command",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "background": "#ebcc34",
-          "foreground": "#000000",
-          "template": "󰒋 {{ .Output }}",
-          "properties": {
-            "shell": "bash",
-            "command": "kubectl version --short | grep Server | awk -F': ' '{print $NF}' | grep -Eo \"v?[0-9]+\\.[0-9]+\\.[0-9]+[-+]?([a-z0-9]+)?\""
-          }
-        },
-	{
-	  "type": "command",
-          "style": "powerline",
-          "powerline_symbol": "",
-	  "background": "#9866C7",
-          "foreground": "#000000",
-	  "template": " {{ .Output }}",
-          "properties": {
-            "shell": "bash",
-            "command": "helm version --short | awk -F+ '{print $1}'"
-          }
-        },
-        {
-          "type": "session",
-          "style": "diamond",
-          "foreground": "#000000",
-          "background": "p:yellow",
-          "leading_diamond": "\ue0b6",
-          "trailing_diamond": "\ue0b0",
-          "template": " {{ if .SSHSession }}\ueba9 {{ end }}{{ .UserName }} "
-        },
-        {
-          "type": "path",
-          "style": "powerline",
-          "powerline_symbol": "\ue0b0",
-          "foreground": "#000000",
-          "background": "p:orange",
-          "template": " \uea83 {{ path .Path .Location }} ",
-          "properties": {
-            "style": "folder"
-          }
-        },
-	{
-	  "type": "git",
-	  "style": "powerline",
-	  "powerline_symbol": "",
-	  "foreground": "#000000",
-	  "background": "p:green",
-	  "branch_icon": "\uE725",
-	  "background_templates": [
-	    "{{ if or (.Working.Changed) (.Staging.Changed) }}p:yellow{{ end }}",
-	    "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#FFCC80{{ end }}",
-	    "{{ if gt .Ahead 0 }}#B388FF{{ end }}",
-	    "{{ if gt .Behind 0 }}#B388FB{{ end }}"
-	  ],
-	  "template": " {{ .UpstreamIcon }} {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}",
-	  "properties": {
-	    "fetch_status": true,
-	    "fetch_stash_count": true,
-	    "fetch_upstream_icon": true,
-	    "untracked_modes": {
-	      "/Users/user/Projects/oh-my-posh/": "no"
-	    }
-	  }
-	},
-	{
-	  "type": "gcp",
-	  "style": "powerline",
-	  "powerline_symbol": "",
-	  "foreground": "#000000",
-	  "background": "#47888d",
-	  "template": " {{.Project}} {{.Account}} "
-	},
-        {
-          "type": "root",
-          "style": "powerline",
-          "powerline_symbol": "\ue0b0",
-          "foreground": "p:white",
-          "background": "p:yellow",
-          "template": " \uf0e7 "
-        },
-        {
-          "type": "exit",
-          "style": "diamond",
-          "foreground": "p:white",
-          "background": "p:blue",
-          "background_templates": [
-            "{{ if gt .Code 0 }}p:red{{ end }}"
-          ],
-          "leading_diamond": "<transparent,background>\ue0b0</>",
-          "trailing_diamond": "\ue0b4",
-          "template": " {{ if gt .Code 0 }}\uf00d{{ else }}\uf00c{{ end }} ",
-          "properties": {
-            "always_enabled": true
-          }
-        },
-	{
-	  "type": "battery",
-	  "style": "powerline",
-	  "powerline_symbol": "",
-	  "foreground": "#193549",
-	  "background": "#ffeb3b",
-	  "background_templates": [
-	    "{{if eq \"Charging\" .State.String}}#40c4ff{{end}}",
-	    "{{if eq \"Discharging\" .State.String}}#ff5722{{end}}",
-	    "{{if eq \"Full\" .State.String}}#4caf50{{end}}"
-	  ],
-	  "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }} ",
-	  "properties": {
-	    "discharging_icon": " ",
-	    "charging_icon": " ",
-	    "charged_icon": " "
-	  }
-	},
-	{
-	  "type": "text",
-	  "style": "diamond",
-	  "template": "\n λ"
-	}
-      ]
-    },
-    {
-      "type": "rprompt",
-      "segments": [
-        {
-          "type": "node",
-          "style": "plain",
-          "foreground": "p:green",
-          "background": "transparent",
-          "template": "\ue718 ",
-          "properties": {
-            "display_mode": "files",
-            "fetch_package_manager": false,
-            "home_enabled": false
-          }
-        },
-        {
-          "type": "go",
-          "style": "plain",
-          "foreground": "p:blue",
-          "background": "transparent",
-          "template": "\ue626 ",
-          "properties": {
-            "fetch_version": false
-          }
-        },
-        {
-          "type": "python",
-          "style": "plain",
-          "foreground": "p:yellow",
-          "background": "transparent",
-          "template": "\ue235 ",
-          "properties": {
-            "display_mode": "files",
-            "fetch_version": false,
-            "fetch_virtual_env": false
-          }
-        },
-        {
-          "type": "time",
-          "style": "plain",
-          "foreground": "p:white",
-          "background": "transparent",
-          "template": "at <p:blue><b>{{ .CurrentDate | date \"15:04:05\" }}</b></>"
-        }
-      ]
-    }
-  ],
-  "tooltips": [
-    {
-      "type": "aws",
-      "tips": [
-        "aws"
-      ],
-      "style": "diamond",
-      "foreground": "p:white",
-      "background": "p:orange",
-      "leading_diamond": "\ue0b0",
-      "trailing_diamond": "\ue0b4",
-      "template": " \ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} ",
-      "properties": {
-        "display_default": true
-      }
-    },
-    {
-      "type": "az",
-      "tips": [
-        "az"
-      ],
-      "style": "diamond",
-      "foreground": "p:white",
-      "background": "p:blue",
-      "leading_diamond": "\ue0b0",
-      "trailing_diamond": "\ue0b4",
-      "template": " \ufd03 {{ .Name }} ",
-      "properties": {
-        "display_default": true
-      }
-    }
-  ],
-  "transient_prompt": {
-    "foreground": "p:black",
-    "background": "transparent",
-    "template": "<p:yellow,transparent>\ue0b6</><,p:yellow> {{ .Folder }} </><p:yellow,transparent>\ue0b0</> "
-  },
-  "secondary_prompt": {
-    "foreground": "p:black",
-    "background": "transparent",
-    "template": "<p:yellow,transparent>\ue0b6</><,p:yellow> > </><p:yellow,transparent>\ue0b0</> "
-  },
-  "palette": {
-    "black": "#262B44",
-    "blue": "#4B95E9",
-    "green": "#59C9A5",
-    "orange": "#F07623",
-    "red": "#D81E5B",
-    "white": "#E0DEF4",
-    "yellow": "#F3AE35"
-  }
-}
+Exporting current theme :
+```bash
+oh-my-posh config export --output ~/.mytheme.omp.json
 ```
 
 # 02 - Fish shell
@@ -767,7 +55,7 @@ Fish is a smart & user-friendly command line shell for Linux, macOS, and the res
 - https://fishshell.com/
 - https://github.com/fish-shell/fish-shell
 
-```
+```bash
 sudo apt-add-repository ppa:fish-shell/release-3
 sudo apt-get update
 sudo apt-get install fish
@@ -778,18 +66,18 @@ sudo apt-get install fish
 - https://github.com/oh-my-fish/oh-my-fish
 
 install it :
-```
+```bash
 curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
 ```
 
 List theme with :
-```
+```bash
 omf theme
 ```
 
 You can then install themes using the `omf` command :
 
-```
+```bash
 omf install shellder
 ```
 
@@ -875,7 +163,7 @@ VSCode will probably not display fonts correctly. To fix this, just open the set
 }
 ```
 ## Tools
-
+### Eza
 Eza : https://github.com/eza-community/eza
 
 ```
@@ -887,6 +175,10 @@ sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.lis
 sudo apt update
 sudo apt install -y eza
 ```
+
+### Bat
+Bat : https://github.com/sharkdp/bat
+
 
 ## Functions
 
@@ -915,6 +207,19 @@ functions --erase k
 To create alias execute following commands:
 
 ```bash
+function bat
+  command bat --paging=never $argv
+end
+```
+
+then :
+```bash
+funcsave bat
+```
+
+Eza function :
+
+```bash
 function ls --wraps ls
   eza --icons --group-directories-first $argv
 end
@@ -926,16 +231,14 @@ function ll --wraps ll
 end
 ```
 
+Bat functions:
+
 ```bash
-function bat
-  command bat --paging=never $argv
+function kat --wraps="kubectl get"
+  kubectl get $argv -oyaml | kubectl neat | bat --color=always -l yaml
 end
 ```
 
-then :
-```bash
-funcsave bat
-```
 vcluster function:
 ```bash
 function vk --wraps=vcluster
@@ -945,22 +248,28 @@ end
 
 kubernetes useful functions:
 ```bash
-function keti --wraps=kubectl-exec-it
+function keti --wraps="kubectl exec -it"
   kubectl exec -it $argv
 end
 ```
 ```bash
-function kd --wraps=kubectl-describe
+function kd --wraps="kubectl describe"
   kubectl describe $argv
 end
 ```
 ```bash
-function kg --wraps=kubectl-get
+function kdel --wraps="kubectl delete"
+  kubectl describe $argv
+end
+```
+
+```bash
+function kg --wraps="kubectl get"
   kubectl get $argv
 end
 ```
 ```bash
-function kimg --wraps=kubectl-get-img
+function kimg --wraps="kubectl get"
   if test $argv[1] = "deploy"
     kubectl get $argv -ojson | jq '.spec.template.spec.initContainers[]?.image, .spec.template.spec.containers[].image'
   else
@@ -969,27 +278,27 @@ function kimg --wraps=kubectl-get-img
 end
 ```
 ```bash
-function kga --wraps=kubectl-get-annotations
+function kga --wraps="kubectl get"
   kubectl get $argv -ojson | jq '.metadata.annotations'
 end
 ```
 ```bash
-function kgl --wraps=kubectl-get-labels
+function kgl --wraps="kubectl get"
   kubectl get $argv -ojson | jq '.metadata.labels'
 end
 ```
 ```bash
-function krr --wraps=kubectl-rollout-restart
+function krr --wraps="kubectl rollout restart"
   kubectl rollout restart $argv
 end
 ```
 ```bash
-function kyn --wraps=kubectl-oyaml-neat
+function kyn --wraps="kubectl get"
   kubectl get $argv -oyaml | kubectl neat | yq
 end
 ```
 ```bash
-function kvol --wraps=kubectl-get-volumes
+function kvol --wraps="kubectl get"
   if test $argv[1] = "deploy"
     kubectl get $argv -ojson | jq '.spec.template.spec.volumes, .spec.template.spec.volumes'
   else
@@ -998,12 +307,12 @@ function kvol --wraps=kubectl-get-volumes
 end
 ```
 ```bash
-function kown --wraps=kubectl-get-owner
+function kown --wraps="kubectl get"
   kubectl get $argv -ojson | jq '.metadata.ownerReferences'
 end
 ```
 ```bash
-function kport --wraps=kubectl-get-port
+function kport --wraps="kubectl get"
   if test $argv[1] = "deploy"
     kubectl get $argv -ojson | jq '.spec.template.spec.initContainers[]?.ports, .spec.template.spec.containers[].ports'
   else
@@ -1012,7 +321,7 @@ function kport --wraps=kubectl-get-port
 end
 ```
 ```bash
-function kmount --wraps=kubectl-get-volumeMounts
+function kmount --wraps="kubectl get"
   if test $argv[1] = "deploy"
     kubectl get $argv -ojson | jq '.spec.template.spec.initContainers[]?.volumeMounts, .spec.template.spec.containers[].volumeMounts'
   else
@@ -1021,7 +330,7 @@ function kmount --wraps=kubectl-get-volumeMounts
 end
 ```
 ```bash
-function kgqos --wraps kubectl
+function kgqos --wraps="kubectl get pods"
   kubectl get pods $argv -o custom-columns="NAME:.metadata.name, QOS:.status.qosClass, REQUESTS:.spec.containers[*].resources.requests, LIMITS:.spec.containers[*].resources.limits, PRIORITY_CLASS:.spec.priorityClassName"
 end
 ```
@@ -1031,7 +340,7 @@ end
 
 To handle plugins, you can install `Fisher` :
 
-```
+```bash
 curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 ```
 
@@ -1078,8 +387,8 @@ And add it to the ` ~/.config/fish/config.fish` file:
 echo 'set -gx PATH $PATH $HOME/.krew/bin' >> ~/.config/fish/config.fish
 ```
 
-  - Test your command :
-```
+- Test your command :
+```bash
 kubectl krew
 ```
 
@@ -1095,12 +404,12 @@ Utility functions to start your ssh agent when using fish shell. You will only n
 
 - https://github.com/danhper/fish-ssh-agent
 
-```
+```bash
 fisher install danhper/fish-ssh-agent
 ```
 
 Then you can directly use `ssh-add` :
-```
+```bash
 ssh-add /home/fred/.ssh/wsl_github.pub
 ssh-add /home/fred/.ssh/wsl_github
 ```
@@ -1111,17 +420,17 @@ Fuzzy Finder or `fzf` is a general purpose command line tool to find anything fa
 
 - https://github.com/jethrokuan/fzf#usage
 
-```
+```bash
 fisher install jethrokuan/fzf
 ```
 
 You may have to install `fzf` package as well:
-```
+```bash
 apt install fzf
 ```
 
 or :
-```
+```bash
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 ```
@@ -1143,7 +452,7 @@ Useful plugin is the kubectl completion that you can find here :
 
 - https://github.com/evanlucas/fish-kubectl-completions
 
-```
+```bash
 fisher install evanlucas/fish-kubectl-completions
 ```
 
@@ -1159,13 +468,13 @@ Kubextc and Kubens tools are very useful for managing kubernetes cluster :
 
 To install `kubens` and `kubectx` with `krew` plugin manager, just execute following commands :
 
-```
+```bash
 kubectl krew install ctx
 kubectl krew install ns
 ```
 
 And then use following commands to use it :
-```
+```bash
 kubectl ns
 kubectl ctx
 ```
@@ -1175,7 +484,7 @@ Kubectl neat allows to avoid managed fields displaying:
 - https://github.com/itaysk/kubectl-neat
 
 Install with krew:
-```
+```bash
 kubectl krew install neat
 ```
 
@@ -1184,7 +493,7 @@ This kubectl plugin extends the Datree CLI's capabilities to allow scanning reso
 - https://github.com/datreeio/kubectl-datree
 
 Install with krew:
-```
+```bash
 kubectl krew install datree
 ```
 
@@ -1193,7 +502,7 @@ kubectl-whoami is a kubectl plugin that show the subject that's currently authen
 - https://github.com/rajatjindal/kubectl-whoami
 
 Install with krew:
-```
+```bash
 kubectl krew install whoami
 ```
 
@@ -1202,7 +511,7 @@ Manage your kubeconfig more easily.
 - https://github.com/sunny0826/kubecm
 
 Install with krew:
-```
+```bash
 kubectl krew install kc
 ```
 
@@ -1212,15 +521,32 @@ This tool helps you manage multiple active versions of Node on a single local en
 - https://github.com/jorgebucaran/nvm.fish
 
 Install with fisher:
-```
+```bash
 fisher install jorgebucaran/nvm.fish
 ```
 
 Install latest LTS node version and display:
-```
+```bash
 nvm install lts
 nvm list
 nvm current
+```
+
+### GVM fish
+```bash
+fisher install JGAntunes/fish-gvm
+fisher install edc/bass
+
+sudo apt-get install bison
+sudo apt install golang
+bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+```
+
+use GVM :
+```bash
+gvm listall
+gvm install go1.21.7
+gvm use go1.21.7 --default
 ```
 
 ### Kubectl ktop
@@ -1228,7 +554,7 @@ A top-like tool for your Kubernetes cluster
 - https://github.com/vladimirvivien/ktop
 
 Install with krew:
-```
+```bash
 kubectl krew install ktop
 ```
 
@@ -1237,7 +563,7 @@ kubectl plugin lists allocations for resources (cpu, memory, gpu,...) as defined
 - https://github.com/davidB/kubectl-view-allocations
 
 Install with krew:
-```
+```bash
 kubectl krew install view-allocations
 ```
 
@@ -1248,7 +574,7 @@ kubectl krew install view-allocations
 kubespy is a kubectl plugin to debug a running pod. It creates a short-lived spy container, using specified image containing all the required debugging tools, to "spy" the target container by joining its OS namespaces. So the original target container image can keep clean without sacrificing the convenience for debugging on demand.
 
 Install with krew:
-```
+```bash
 kubectl krew install spy
 ```
 
@@ -1257,7 +583,7 @@ kubectl krew install spy
 - https://github.com/stern/stern
 
 Install with krew:
-```
+```bash
 kubectl krew install stern
 ```
 
@@ -1266,7 +592,7 @@ kubectl krew install stern
 - https://github.com/kubepug/kubepug
 
 Install with krew:
-```
+```bash
 kubectl krew install deprecations
 ```
 
@@ -1275,7 +601,7 @@ kubectl krew install deprecations
 - https://github.com/corneliusweig/ketall
 
 Install with krew:
-```
+```bash
 kubectl krew install get-all
 ```
 
@@ -1284,7 +610,7 @@ kubectl krew install get-all
 - https://github.com/ahmetb/kubectl-tree
 
 Install with krew:
-```
+```bash
 kubectl krew install tree
 ```
 
@@ -1293,7 +619,7 @@ kubectl krew install tree
 - https://github.com/replicatedhq/outdated
 
 Install with krew:
-```
+```bash
 kubectl krew install outdated
 ```
 
