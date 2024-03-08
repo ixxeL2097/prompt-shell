@@ -163,10 +163,92 @@ VSCode will probably not display fonts correctly. To fix this, just open the set
 }
 ```
 ## Tools
+
+### Nala
+
+Nala is a better package manager than apt
+
+- https://gitlab.com/volian/nala#installation
+```bash
+sudo apt install nala
+```
+
+### Neofetch/Cpufetch/Cmatrix
+
+```bash
+sudo nala install neofetch cpufetch cmatrix
+```
+
+### GDU
+- https://github.com/dundee/gdu
+```bash
+sudo nala install gdu
+```
+
+### Ranger
+- https://github.com/ranger/ranger
+```bash
+sudo nala install ranger
+```
+
+### Hombrew
+
+- https://brew.sh/
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+add this to your `~/.config/fish/config.fish`:
+```bash
+set -gx HOMEBREW_PREFIX "/home/linuxbrew/.linuxbrew"
+set -gx HOMEBREW_CELLAR "$HOMEBREW_PREFIX/Cellar"
+set -gx HOMEBREW_REPOSITORY "$HOMEBREW_PREFIX/Homebrew"
+fish_add_path -gP "$HOMEBREW_PREFIX/bin" "$HOMEBREW_PREFIX/sbin";
+! set -q MANPATH; and set MANPATH ''; set -gx MANPATH "$HOMEBREW_PREFIX/share/man" $MANPATH;
+! set -q INFOPATH; and set INFOPATH ''; set -gx INFOPATH "$HOMEBREW_PREFIX/share/info" $INFOPATH;
+```
+### Btop
+- https://github.com/aristocratos/btop
+```bash
+brew install btop
+```
+
+### Ripgrep
+- https://github.com/BurntSushi/ripgrep
+
+```bash
+brew install ripgrep
+```
+
+### Zoxide
+- https://github.com/ajeetdsouza/zoxide
+
+```bash
+brew install zoxide
+```
+
+```bash
+zoxide init fish
+zoxide init fish | source
+```
+
+Add it to your `~/.config/fish/config.fish`:
+```bash
+zoxide init fish | source
+```
+
+then create function:
+
+```bash
+function cd --wraps="z"
+  z $argv
+end
+```
+
 ### Eza
 Eza : https://github.com/eza-community/eza
 
-```
+```bash
 sudo apt install -y gpg
 sudo mkdir -p /etc/apt/keyrings
 wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
@@ -174,6 +256,22 @@ echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable
 sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
 sudo apt update
 sudo apt install -y eza
+```
+### Dust
+
+- https://github.com/bootandy/dust
+
+```bash
+brew install dust
+```
+
+### TLDR
+
+- https://github.com/tldr-pages/tldr
+
+
+```bash
+brew install tldr
 ```
 
 ### Bat
