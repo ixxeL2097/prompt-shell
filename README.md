@@ -303,7 +303,11 @@ functions --erase k
 ```
 
 To create alias execute following commands:
-
+```bash
+function cat --wraps="bat-pp"
+  bat -pp $argv
+end
+```
 ```bash
 function bat
   command bat --paging=never $argv
