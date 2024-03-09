@@ -547,6 +547,21 @@ Shortcut:
 | Ctrl-o      | Alt-o           | Open a file/dir using default editor ($EDITOR)  |
 | Ctrl-g      | Alt-Shift-o     | Open a file/dir using xdg-open or open command  |
 
+### Puffer fish
+
+- https://github.com/nickeb96/puffer-fish
+
+```bash
+fisher install nickeb96/puffer-fish
+```
+
+### Fish abreviation tips
+
+- https://github.com/Gazorby/fish-abbreviation-tips?tab=readme-ov-file
+
+```bash
+fisher install gazorby/fish-abbreviation-tips
+```
 
 ### Kubectl auto-completion
 
