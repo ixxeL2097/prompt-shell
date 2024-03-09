@@ -55,50 +55,50 @@
         "background": "#ebcc34",
         "template": " 󰠳 {{.Context}}{{if .Namespace}} 󰀽 {{.Namespace}}{{end}} "
       },
-          {
-            "type": "command",
-            "style": "powerline",
-            "powerline_symbol": "",
-            "background": "#ebcc34",
-            "foreground": "#000000",
-            "template": "󰒋 {{ .Output }}",
-            "properties": {
-              "shell": "bash",
-              "command": "kubectl version --short | grep Server | awk -F': ' '{print $NF}' | grep -Eo \"v?[0-9]+\\.[0-9]+\\.[0-9]+[-+]?([a-z0-9]+)?\""
-            }
-          },
       {
         "type": "command",
-            "style": "powerline",
-            "powerline_symbol": "",
+        "style": "powerline",
+        "powerline_symbol": "",
+        "background": "#ebcc34",
+        "foreground": "#000000",
+        "template": "󰒋 {{ .Output }}",
+        "properties": {
+          "shell": "bash",
+          "command": "kubectl version --short | grep Server | awk -F': ' '{print $NF}' | grep -Eo \"v?[0-9]+\\.[0-9]+\\.[0-9]+[-+]?([a-z0-9]+)?\""
+        }
+      },
+      {
+        "type": "command",
+        "style": "powerline",
+        "powerline_symbol": "",
         "background": "#9866C7",
-            "foreground": "#000000",
+        "foreground": "#000000",
         "template": " {{ .Output }}",
-            "properties": {
-              "shell": "bash",
-              "command": "helm version --short | awk -F+ '{print $1}'"
-            }
-          },
-          {
-            "type": "session",
-            "style": "diamond",
-            "foreground": "#000000",
-            "background": "p:yellow",
-            "leading_diamond": "\ue0b6",
-            "trailing_diamond": "\ue0b0",
-            "template": " {{ if .SSHSession }}\ueba9 {{ end }}{{ .UserName }} "
-          },
-          {
-            "type": "path",
-            "style": "powerline",
-            "powerline_symbol": "\ue0b0",
-            "foreground": "#000000",
-            "background": "p:orange",
-            "template": " \uea83 {{ path .Path .Location }} ",
-            "properties": {
-              "style": "folder"
-            }
-          },
+        "properties": {
+          "shell": "bash",
+          "command": "helm version --short | awk -F+ '{print $1}'"
+          }
+      },
+      {
+        "type": "session",
+        "style": "diamond",
+        "foreground": "#000000",
+        "background": "p:yellow",
+        "leading_diamond": "\ue0b6",
+        "trailing_diamond": "\ue0b0",
+        "template": " {{ if .SSHSession }}\ueba9 {{ end }}{{ .UserName }} "
+      },
+      {
+        "type": "path",
+        "style": "powerline",
+        "powerline_symbol": "\ue0b0",
+        "foreground": "#000000",
+        "background": "p:orange",
+        "template": " \uea83 {{ path .Path .Location }} ",
+        "properties": {
+          "style": "folder"
+        }
+      },
       {
         "type": "git",
         "style": "powerline",
