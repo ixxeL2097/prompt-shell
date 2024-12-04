@@ -1,4 +1,3 @@
-set distro (awk '/^ID=/' /etc/*-release | awk -F '=' '{print tolower($2)}')
 switch $distro
   case '*alpine*'
     set ICON " "
@@ -28,6 +27,7 @@ switch $distro
     set ICON " "
 end
 set -gx STARSHIP_DISTRO $ICON
+set -U devbox_no_prompt true
 kubectl completion fish | source
 k completion fish | source
 devbox global shellenv --init-hook | source
