@@ -26,6 +26,8 @@ switch $distro
   case '*'
     set ICON " "
 end
+set -gx PATH $PATH $HOME/.local/bin
+set -gx PATH $PATH $HOME/.krew/bin
 set -gx STARSHIP_DISTRO $ICON
 set -U devbox_no_prompt true
 kubectl completion fish | source
@@ -34,8 +36,6 @@ devbox global shellenv --init-hook | source
 #starship init fish | source
 oh-my-posh init fish --config ~/.ohmyposh.json | source
 devbox completion fish | source
-set -gx PATH $PATH $HOME/.krew/bin
-set -gx PATH $PATH $HOME/.local/bin
 
 set -gx HOMEBREW_PREFIX "/home/linuxbrew/.linuxbrew"
 set -gx HOMEBREW_CELLAR "$HOMEBREW_PREFIX/Cellar"
