@@ -450,6 +450,15 @@ function kgqos --wraps="kubectl get pods"
   kubectl get pods $argv -o custom-columns="NAME:.metadata.name, QOS:.status.qosClass, REQUESTS:.spec.containers[*].resources.requests, LIMITS:.spec.containers[*].resources.limits, PRIORITY_CLASS:.spec.priorityClassName"
 end
 ```
+```bash
+function kpf --wraps='kubectl port-forward'
+          if test (count $argv) -ne 2
+              echo "Usage: port-forward <service_name> <local_port:target_port>"
+              return 1
+          end
+          kubectl port-forward svc/$argv[1] $argv[2]
+      end
+```
 
 ## Plugin manager
 ### Fisher : fish plugin manager
