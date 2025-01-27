@@ -164,6 +164,20 @@ VSCode will probably not display fonts correctly. To fix this, just open the set
 ```
 ## Tools
 
+### DevBox
+```bash
+curl -fsSL https://get.jetify.com/devbox | bash
+```
+
+On fish you need to set `SHELL` variable properly :
+```bash
+chsh -s /usr/bin/fish
+```
+and then recompute :
+```bash
+devbox global shellenv --init-hook --recompute
+```
+
 ### Nala
 
 Nala is a better package manager than apt
