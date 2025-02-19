@@ -33,9 +33,9 @@ set -U devbox_no_prompt true
 kubectl completion fish | source
 k completion fish | source
 devbox global shellenv --init-hook | source
-#starship init fish | source
 oh-my-posh init fish --config ~/.ohmyposh.json | source
 devbox completion fish | source
+task --completion fish | source
 
 set -gx HOMEBREW_PREFIX "/home/linuxbrew/.linuxbrew"
 set -gx HOMEBREW_CELLAR "$HOMEBREW_PREFIX/Cellar"
