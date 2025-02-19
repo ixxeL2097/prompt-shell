@@ -322,6 +322,13 @@ function nonix --wraps="disable nix"                                            
   set -x PATH (string replace -r '/nix/store.*|.devbox' '' $PATH)
 end
 ```
+Taskfile global:
+```fish
+function tg --wraps="task -g"                                                                                                                                                                                                                                                             ❮    
+  task -g $argv
+end
+```
+
 Interactive Taskfile:
 ```fish
 function it -d 'Run Taskfile tasks interactively'                                                                                                                                                                                                                                         ❮    
@@ -333,7 +340,7 @@ function it -d 'Run Taskfile tasks interactively'                               
                    | sort \
                    | fzf -m --reverse --preview 'task --summary {}' \
                )
-       end
+end
 ```
 
 To create alias execute following commands:
