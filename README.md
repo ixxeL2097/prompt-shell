@@ -316,6 +316,26 @@ If you want to delete function, you can use following cmd :
 functions --erase k
 ```
 
+Disable nix with devbox:
+```fish
+function nonix --wraps="disable nix"                                                                                                                                                                                                                                          ❮  5s 376ms     
+  set -x PATH (string replace -r '/nix/store.*|.devbox' '' $PATH)
+end
+```
+Interactive Taskfile:
+```fish
+function it -d 'Run Taskfile tasks interactively'                                                                                                                                                                                                                                         ❮    
+               task $argv (\
+                   task --list-all \
+                   | cut -d ' ' -f2 \
+                   | tail -n +2 \
+                   | sed 's/://' \
+                   | sort \
+                   | fzf -m --reverse --preview 'task --summary {}' \
+               )
+       end
+```
+
 To create alias execute following commands:
 ```bash
 function cat --wraps="bat-pp"
