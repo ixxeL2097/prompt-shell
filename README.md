@@ -324,7 +324,7 @@ end
 ```
 Taskfile global:
 ```fish
-function tg --wraps="task -g"                                                                                                                                                                                                                                                             ❮    
+function tg --wraps="task -g"
   task -g $argv
 end
 ```
