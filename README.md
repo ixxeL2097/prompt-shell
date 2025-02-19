@@ -331,15 +331,15 @@ end
 
 Interactive Taskfile:
 ```fish
-function it -d 'Run Taskfile tasks interactively'                                                                                                                                                                                                                                         ❮    
-               task $argv (\
-                   task --list-all \
-                   | cut -d ' ' -f2 \
-                   | tail -n +2 \
-                   | sed 's/://' \
-                   | sort \
-                   | fzf -m --reverse --preview 'task --summary {}' \
-               )
+function it -d 'Run Taskfile tasks interactively'
+          task $argv (\
+            task --list-all \
+            | cut -d ' ' -f2 \
+            | tail -n +2 \
+            | sed 's/://' \
+            | sort \
+            | fzf -m --reverse --preview 'task --summary {}' \
+           )
 end
 ```
 
