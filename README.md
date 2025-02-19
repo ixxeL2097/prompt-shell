@@ -318,7 +318,7 @@ functions --erase k
 
 Disable nix with devbox:
 ```fish
-function nonix --wraps="disable nix"                                                                                                                                                                                                                                          ❮  5s 376ms     
+function nonix
   set -x PATH (string replace -r '/nix/store.*|.devbox' '' $PATH)
 end
 ```
