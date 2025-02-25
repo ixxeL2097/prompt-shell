@@ -334,9 +334,9 @@ Interactive Taskfile:
 function it -d 'Run Taskfile tasks interactively'
           task $argv (\
             task --list-all \
-            | cut -d ' ' -f2 \
+            | awk '{print $2}' \
             | tail -n +2 \
-            | sed 's/://' \
+            | sed 's/:$//' \
             | sort \
             | fzf -m --reverse --preview 'task --summary {}' \
            )
