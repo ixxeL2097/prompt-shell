@@ -498,6 +498,9 @@ curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 
 - https://github.com/jorgebucaran/fisher
 
+And have a look at :
+https://github.com/jorgebucaran/awsm.fish?tab=readme-ov-file
+
 
 ### Krew : kubectl plugin manager
 
